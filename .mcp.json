@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "maptec": {
-      "transport": "streamable-http",
+      "type": "http",
       "url": "https://mcp.maptec.com/mcp",
       "headers": {
         "Authorization": "${MAPTEC_API_KEY}"

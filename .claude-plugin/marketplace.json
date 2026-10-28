@@ -1,0 +1,21 @@
+{
+  "name": "maptec-open-plugins",
+  "owner": {
+    "name": "云图知行",
+    "email": "nikai@maptec.com"
+  },
+  "metadata": {
+    "description": "Maptec skills and MCP tools for location search and route planning."
+  },
+  "plugins": [
+    {
+      "name": "maptec-maps",
+      "description": "Search places, geocode addresses, and plan routes with Maptec.",
+      "source": {
+        "source": "github",
+        "repo": "maptec-api/agent-plugins"
+      },
+      "keywords": ["maptec", "maps", "geocoding", "routes", "mcp"]
+    }
+  ]
+}

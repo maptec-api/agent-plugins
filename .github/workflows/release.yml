@@ -1,0 +1,40 @@
+name: Release packages
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Verify release version
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFile } from 'node:fs/promises';
+          const { version } = JSON.parse(await readFile('package.json', 'utf8'));
+          assert.equal(process.env.RELEASE_TAG, `v${version}`, 'Release tag must match package.json');
+          NODE
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: node scripts/package-marketplaces.js
+      - name: Upload installation packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload "$RELEASE_TAG" dist/marketplaces/*.zip --repo "$GH_REPO"

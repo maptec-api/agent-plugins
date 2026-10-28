@@ -2,27 +2,30 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "author": {
     "email": "nikai@maptec.com",
-    "name": "kyle ni"
+    "name": "云图知行"
   },
   "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
   "extensions": {
     "com.openai": {
       "interface": {
-        "capabilities": ["Read", "Write", "Interactive"],
+        "capabilities": [
+          "Read"
+        ],
         "category": "Travel",
         "defaultPrompt": [
           "帮我搜索指定地点附近的餐厅，并规划前往其中一家餐厅的路线。",
           "Geocode an address in Beijing and plan a driving route to the result.",
           "Find places near a coordinate and calculate route distance between two points."
         ],
-        "developerName": "kyle ni",
+        "developerName": "云图知行",
         "displayName": "Maptec Maps",
         "composerIcon": "./assets/icon.png",
         "composerIconDark": "./assets/logo-dark.png",
         "logo": "./assets/logo.png",
         "logoDark": "./assets/logo-dark.png",
         "longDescription": "通过 Maptec 官方远程 MCP 服务查询地点、解析地址、规划路线及计算距离。需要在连接时提供 Maptec API Key。具体可用能力以连接后发现的工具为准。",
-        "shortDescription": "地点搜索、地理编码与路线规划"
+        "shortDescription": "地点搜索、地理编码与路线规划",
+        "websiteURL": "https://lbs.maptec.com"
       }
     }
   },
@@ -35,5 +38,5 @@
     "places"
   ],
   "name": "maptec-maps",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

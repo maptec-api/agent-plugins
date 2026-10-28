@@ -1,17 +1,25 @@
 {
   "name": "@maptec/agent-plugins",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Maptec open-platform plugins for AI coding assistants",
   "type": "module",
   "scripts": {
     "build:codex-plugin": "node scripts/build-codex-plugin.js",
     "validate:codex-plugin": "node scripts/validate-plugin.js",
-    "check": "npm run build:codex-plugin && npm run validate:codex-plugin"
+    "check": "npm test && npm run validate:skills && npm run build:codex-plugin && npm run validate:codex-plugin && npm run build:marketplaces && npm run validate:marketplaces",
+    "build:marketplaces": "node scripts/build-marketplaces.js",
+    "validate:marketplaces": "node scripts/validate-marketplaces.js",
+    "package:marketplaces": "npm run validate:skills && npm run build:marketplaces && npm run validate:marketplaces && node scripts/package-marketplaces.js",
+    "validate:skills": "node scripts/validate-skills.js",
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
-    "url": "https://cnb.cool/maptechbj/applied/openplatform/agent-plugins"
+    "url": "https://github.com/maptec-api/agent-plugins"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "yaml": "^2.9.1"
+  }
 }

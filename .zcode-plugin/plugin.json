@@ -1,0 +1,26 @@
+{
+  "name": "maptec-maps",
+  "version": "0.1.1",
+  "description": "Search places, geocode addresses, and plan routes with Maptec.",
+  "author": { "name": "云图知行", "email": "nikai@maptec.com" },
+  "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
+  "repository": "https://github.com/maptec-api/agent-plugins",
+  "license": "MIT",
+  "skills": "./skills/",
+  "userConfig": {
+    "maptec_api_key": {
+      "type": "string",
+      "title": "Maptec API Key",
+      "description": "Application API key from https://lbs.maptec.com/console/ . Enter the key itself, without Bearer.",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "maptec": {
+      "type": "http",
+      "url": "https://mcp.maptec.com/mcp",
+      "headers": { "Authorization": "${user_config.maptec_api_key}" }
+    }
+  }
+}

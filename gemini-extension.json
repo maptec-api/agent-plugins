@@ -1,0 +1,19 @@
+{
+  "name": "maptec-maps",
+  "version": "0.1.1",
+  "description": "Search places, geocode addresses, and plan routes with Maptec.",
+  "settings": [
+    {
+      "name": "Maptec API Key",
+      "description": "Application API key from https://lbs.maptec.com/console/ . Enter the key itself, without Bearer.",
+      "envVar": "MAPTEC_API_KEY",
+      "sensitive": true
+    }
+  ],
+  "mcpServers": {
+    "maptec": {
+      "httpUrl": "https://mcp.maptec.com/mcp",
+      "headers": { "Authorization": "${MAPTEC_API_KEY}" }
+    }
+  }
+}

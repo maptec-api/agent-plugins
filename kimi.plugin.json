@@ -1,0 +1,13 @@
+{
+  "name": "maptec-maps",
+  "version": "0.1.1",
+  "description": "Search places, geocode addresses, and plan routes using a separately connected Maptec MCP server.",
+  "author": { "name": "云图知行", "email": "nikai@maptec.com" },
+  "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Maptec Maps",
+    "shortDescription": "地点搜索、地理编码与路线规划"
+  }
+}

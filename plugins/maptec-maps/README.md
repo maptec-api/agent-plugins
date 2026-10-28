@@ -1,37 +1,50 @@
 # Maptec Maps (ChatGPT / Codex)
 
-ChatGPT Agent Plugins and Codex plugin package for [Maptec MCP](https://lbs.maptec.com/docs/en-US/mcp/introduction).
+Maptec MCP and Skills package by **云图知行**.
 
-## Monorepo workflow
+[English installation guide](../../README.md) | [中文安装说明](../../README.zh-CN.md)
 
-Edit **`../../skills/`** and **`../../assets/`** at the repository root. This directory’s `skills/`, `assets/`, and `.mcp.json` are **generated** — run from the repo root:
+Source: [maptec-api/agent-plugins](https://github.com/maptec-api/agent-plugins).
 
-```bash
-npm run build:codex-plugin
-```
+## Codex installation
 
-Host-specific files stay here and are committed:
+When a published version is available, download `maptec-maps-codex-<version>.zip` from [GitHub Releases](https://github.com/maptec-api/agent-plugins/releases). Extract the archive and run `codex plugin marketplace add .` in the extracted directory. It includes the market index and plugin content, so no build is required.
 
-| File | Purpose |
-|------|---------|
-| `plugin.json` | ChatGPT / agent-plugins.org manifest |
-| `mcp.json` | ChatGPT MCP manifest (OpenAI auth extensions) |
-| `mcp.codex.json` | Source for generated `.mcp.json` (Codex) |
-| `.codex-plugin/plugin.json` | Codex plugin manifest |
+### From source
 
-## Codex local testing
+Run from the repository root:
 
 ```bash
 npm run build:codex-plugin
 codex plugin marketplace add .
 ```
 
-Install **maptec-maps** from the **Maptec Open Plugins** marketplace, then configure your Maptec API key when prompted.
+Install **maptec-maps** from **Maptec Open Plugins**, then configure your Maptec API key through the host credential flow.
 
-## ChatGPT
+## ChatGPT connection requirements
 
-Install according to your team’s ChatGPT plugin workflow using `plugin.json` and `mcp.json` in this folder (after `build:codex-plugin`).
+`plugin.json` and `mcp.json` declare the Skill and remote Maptec MCP connection. The package requires a host that supports custom-header API-key authentication. Standard ChatGPT remote MCP setup currently does not provide this API-key configuration flow.
+
+## Maptec API key
+
+Create an application API key in the [Maptec console](https://lbs.maptec.com/console/).
+
+- Endpoint: `https://mcp.maptec.com/mcp`
+- Header: `Authorization`, with the raw API key and no `Bearer` prefix
+
+Use the host credential flow to enter the key.
+
+## Package files
+
+| File | Purpose |
+|---|---|
+| `plugin.json` | Portable plugin manifest |
+| `mcp.json` | MCP connection and authentication declaration |
+| `mcp.codex.json` | Source for the generated Codex `.mcp.json` |
+| `.codex-plugin/plugin.json` | Codex plugin manifest |
+
+The `skills/`, `assets/`, and `.mcp.json` in this directory are generated. Shared sources are at the repository root.
 
 ## License
 
-MIT — see [../../LICENSE](../../LICENSE).
+[MIT](../../LICENSE).

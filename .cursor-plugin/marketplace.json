@@ -1,7 +1,7 @@
 {
   "name": "maptec-open-plugins",
   "owner": {
-    "name": "kyle ni",
+    "name": "云图知行",
     "email": "nikai@maptec.com"
   },
   "metadata": {
@@ -12,10 +12,17 @@
       "name": "maptec-maps",
       "source": ".",
       "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "developer-tools",
       "logo": "assets/logo.png",
-      "keywords": ["maps", "maptec", "geocoding", "routes", "places", "mcp"]
+      "keywords": [
+        "maps",
+        "maptec",
+        "geocoding",
+        "routes",
+        "places",
+        "mcp"
+      ]
     }
   ]
 }

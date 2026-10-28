@@ -1,14 +1,14 @@
 {
   "name": "maptec-maps",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
   "author": {
-    "name": "kyle ni",
+    "name": "云图知行",
     "email": "nikai@maptec.com",
     "url": "https://lbs.maptec.com"
   },
   "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
-  "repository": "https://cnb.cool/maptechbj/applied/openplatform/agent-plugins",
+  "repository": "https://github.com/maptec-api/agent-plugins",
   "license": "MIT",
   "keywords": [
     "maps",
@@ -24,9 +24,11 @@
     "displayName": "Maptec Maps",
     "shortDescription": "地点搜索、地理编码与路线规划",
     "longDescription": "通过 Maptec 官方远程 MCP 服务查询地点、解析地址、规划路线及计算距离。需要在连接时提供 Maptec API Key。具体可用能力以连接后发现的工具为准。",
-    "developerName": "kyle ni",
+    "developerName": "云图知行",
     "category": "Travel",
-    "capabilities": ["Read", "Write", "Interactive"],
+    "capabilities": [
+      "Read"
+    ],
     "websiteURL": "https://lbs.maptec.com",
     "privacyPolicyURL": "https://lbs.maptec.com/docs/en-US/legal/privacy",
     "termsOfServiceURL": "https://lbs.maptec.com/docs/en-US/legal/terms",

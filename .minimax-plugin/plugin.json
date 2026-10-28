@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "maptec-maps",
+  "displayName": "Maptec Maps",
+  "version": "0.1.1",
+  "description": "Search places, geocode addresses, and plan routes using a separately connected Maptec MCP server.",
+  "author": "云图知行",
+  "icon": "assets/icon.png",
+  "category": "Other",
+  "exampleQueries": [
+    "Find cafes within 1000 meters of 1.2868,103.8545 in Singapore.",
+    "Geocode Marina Bay Sands in Singapore.",
+    "Plan a driving route between two coordinates I provide."
+  ],
+  "apps": [],
+  "mcpServers": [],
+  "skills": [
+    "skills/maptec-maps/SKILL.md"
+  ]
+}
