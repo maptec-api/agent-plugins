@@ -1,0 +1,17 @@
+{
+  "name": "@maptec/agent-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Maptec open-platform plugins for AI coding assistants",
+  "type": "module",
+  "scripts": {
+    "build:codex-plugin": "node scripts/build-codex-plugin.js",
+    "validate:codex-plugin": "node scripts/validate-plugin.js",
+    "check": "npm run build:codex-plugin && npm run validate:codex-plugin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://cnb.cool/maptechbj/applied/openplatform/agent-plugins"
+  },
+  "license": "MIT"
+}

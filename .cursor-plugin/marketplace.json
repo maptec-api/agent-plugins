@@ -1,0 +1,21 @@
+{
+  "name": "maptec-open-plugins",
+  "owner": {
+    "name": "kyle ni",
+    "email": "nikai@maptec.com"
+  },
+  "metadata": {
+    "description": "Maptec open-platform plugins for AI coding assistants (Cursor and related hosts)."
+  },
+  "plugins": [
+    {
+      "name": "maptec-maps",
+      "source": ".",
+      "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
+      "version": "0.1.0",
+      "category": "developer-tools",
+      "logo": "assets/logo.png",
+      "keywords": ["maps", "maptec", "geocoding", "routes", "places", "mcp"]
+    }
+  ]
+}

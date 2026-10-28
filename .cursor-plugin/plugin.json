@@ -1,0 +1,36 @@
+{
+  "name": "maptec-maps",
+  "displayName": "Maptec Maps",
+  "version": "0.1.0",
+  "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
+  "author": {
+    "name": "kyle ni",
+    "email": "nikai@maptec.com"
+  },
+  "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
+  "repository": "https://cnb.cool/maptechbj/applied/openplatform/agent-plugins",
+  "license": "MIT",
+  "logo": "./assets/logo.png",
+  "keywords": [
+    "maps",
+    "maptec",
+    "geocoding",
+    "routes",
+    "places",
+    "mcp"
+  ],
+  "category": "developer-tools",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "MAPTEC_API_KEY": {
+        "type": "string",
+        "title": "Maptec API Key",
+        "description": "Application API key from https://lbs.maptec.com/console/ . Sent as the Authorization header value (do not add Bearer unless Maptec docs require it)."
+      }
+    },
+    "required": ["MAPTEC_API_KEY"]
+  }
+}

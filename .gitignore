@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+
+# Generated Codex/ChatGPT package content. Edit root skills/ and assets/, then npm run build:codex-plugin.
+plugins/maptec-maps/skills/
+plugins/maptec-maps/assets/
+plugins/maptec-maps/.mcp.json

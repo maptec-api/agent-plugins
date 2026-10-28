@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "maptec": {
+      "type": "streamable-http",
+      "url": "https://mcp.maptec.com/mcp",
+      "headers": {},
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "api_key",
+            "headerScheme": "custom_header",
+            "headerName": "Authorization"
+          }
+        }
+      }
+    }
+  }
+}

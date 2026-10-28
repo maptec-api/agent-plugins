@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "maptec": {
+      "type": "streamable-http",
+      "url": "https://mcp.maptec.com/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "api_key",
+            "headerScheme": "custom_header",
+            "headerName": "Authorization"
+          }
+        }
+      }
+    }
+  }
+}
