@@ -1,0 +1,13 @@
+{
+  "fields": [
+    {
+      "key": "MAPTEC_API_KEY",
+      "label_zh": "Maptec API Key",
+      "label_en": "Maptec API Key",
+      "type": "password",
+      "required": true,
+      "help_zh": "在 https://lbs.maptec.com/console/ 创建应用 Key。填写原始 Key，不要加 Bearer 前缀。",
+      "help_en": "Create an application key at https://lbs.maptec.com/console/ . Enter the raw key without a Bearer prefix."
+    }
+  ]
+}

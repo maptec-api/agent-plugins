@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "maptec": {
+      "type": "streamableHttp",
+      "url": "https://mcp.maptec.com/mcp",
+      "headers": {
+        "Authorization": "${MAPTEC_API_KEY}"
+      },
+      "timeout": 30000
+    }
+  }
+}

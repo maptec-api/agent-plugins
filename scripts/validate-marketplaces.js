@@ -15,10 +15,24 @@ for (const target of targets) {
   const directory = packageDirectory(target);
   const contentDirectory = target.contentRoot ? `${directory}/${target.contentRoot}` : directory;
   const manifest = await readJson(`${directory}/${target.manifest}`);
-  assert.equal(manifest.name, 'maptec-maps');
-  assert.equal(manifest.version, version, `${target.id}: version mismatch`);
-  if (target.id !== 'gemini') {
-    assert.equal(typeof manifest.author === 'string' ? manifest.author : manifest.author.name, '云图知行');
+  if (target.id === 'workbuddy') {
+    assert.equal(manifest.source, 'maptec');
+    assert.equal(manifest.type, 'mcp');
+    assert.equal(manifest.version, version, `${target.id}: version mismatch`);
+    assert.equal(manifest.auth_mode, 'token');
+    assert.equal(manifest.name_en, 'Maptec Maps');
+  } else if (target.id === 'deepseek') {
+    assert.equal(manifest.id, 'maptec-maps');
+    assert.equal(manifest.schemaVersion, 1);
+    assert.equal(manifest.vendor, '云图知行');
+    assert.equal(manifest.published, true);
+    assert.equal(manifest.featured, false);
+  } else {
+    assert.equal(manifest.name, 'maptec-maps');
+    assert.equal(manifest.version, version, `${target.id}: version mismatch`);
+    if (target.id !== 'gemini') {
+      assert.equal(typeof manifest.author === 'string' ? manifest.author : manifest.author.name, '云图知行');
+    }
   }
   if (['claude', 'zcode'].includes(target.id)) {
     assert.equal(manifest.repository, 'https://github.com/maptec-api/agent-plugins');
@@ -64,6 +78,31 @@ for (const target of targets) {
       type: 'api_key', headerScheme: 'custom_header', headerName: 'Authorization'
     });
   }
+  if (target.id === 'workbuddy') {
+    const mcp = await readJson(`${directory}/mcp.json`);
+    assert.equal(mcp.mcpServers.maptec.type, 'streamableHttp');
+    assert.equal(mcp.mcpServers.maptec.url, 'https://mcp.maptec.com/mcp');
+    assert.equal(mcp.mcpServers.maptec.headers.Authorization, '${MAPTEC_API_KEY}');
+    assert.equal(mcp.mcpServers.maptec.timeout, 30000);
+    const tokenSchema = await readJson(`${directory}/token-schema.json`);
+    assert.equal(tokenSchema.fields.length, 1);
+    assert.equal(tokenSchema.fields[0].key, 'MAPTEC_API_KEY');
+    assert.equal(tokenSchema.fields[0].required, true);
+    const icon = await readFile(`${directory}/icon.svg`, 'utf8');
+    assert(icon.includes('<svg'), 'workbuddy: icon.svg must be SVG');
+    assert(icon.length <= 64 * 1024, 'workbuddy: icon.svg too large');
+  }
+  if (target.id === 'deepseek') {
+    assert.equal(manifest.auth.mode, 'api-key');
+    assert.equal(manifest.auth.apiKeyHeader, 'Authorization');
+    assert.equal(manifest.servers.length, 1);
+    assert.equal(manifest.servers[0].serverKey, 'maptec');
+    assert.equal(manifest.servers[0].serverName, 'maptec-maps');
+    assert.equal(manifest.servers[0].transport, 'streamable-http');
+    assert.equal(manifest.servers[0].url, 'https://mcp.maptec.com/mcp');
+    assert.equal(manifest.servers[0].headers?.Authorization, undefined);
+    assert((await readFile(`${directory}/deepseek/README.md`, 'utf8')).includes('dsh-mcp-connector-registry'));
+  }
 
   const expectedFiles = ['README.md'];
   for (const source of [...target.files, 'skills', 'assets', 'LICENSE']) {
@@ -82,7 +121,13 @@ for (const target of targets) {
   for (const path of await listFiles(directory)) {
     if (path.endsWith('.json')) JSON.parse(await readFile(`${directory}/${path}`, 'utf8'));
   }
-  await validateSkill(`${contentDirectory}/skills/maptec-maps`);
+  const skillMeta = await validateSkill(`${contentDirectory}/skills/maptec-maps`);
+  if (target.id === 'workbuddy') {
+    assert.equal(skillMeta.version, version);
+    assert.equal(skillMeta.author, '云图知行');
+    assert(typeof skillMeta.description_zh === 'string' && skillMeta.description_zh.length > 0);
+    assert(typeof skillMeta.description_en === 'string' && skillMeta.description_en.length > 0);
+  }
   for (const file of ['logo.png', 'icon.png', 'logo-dark.png']) {
     const png = await readFile(`${contentDirectory}/assets/${file}`);
     assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');

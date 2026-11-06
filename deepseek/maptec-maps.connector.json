@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "maptec-maps",
+  "name": "Maptec 地图",
+  "vendor": "云图知行",
+  "icon": "🗺️",
+  "category": "效率工具",
+  "summary": "地点搜索 / 地理编码 / 路线规划 / 距离计算",
+  "description": "接入 Maptec 官方远程 MCP 服务，支持地点与周边搜索、地址与坐标互转、路线规划、距离矩阵、轨迹绑路与 IP 定位等能力。需在 Maptec 控制台创建应用 API Key，并通过 Authorization 请求头传入原始 Key（不要加 Bearer 前缀）；具体可用工具以连接后发现的工具为准。调用配额与费用以 Maptec 账号为准。",
+  "tags": ["Maptec", "地图", "地理编码", "路线规划", "MCP", "官方"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Authorization",
+    "credentialName": "Maptec API Key",
+    "credentialPlaceholder": "请输入 Maptec 应用 API Key",
+    "credentialDescription": "按官方要求将原始 API Key 写入 Authorization 请求头，不要加 Bearer 前缀；Key 仅保存在 DSH 本机。",
+    "credentialHelpLabel": "前往 Maptec 控制台申请 Key"
+  },
+  "servers": [
+    {
+      "serverKey": "maptec",
+      "serverName": "maptec-maps",
+      "url": "https://mcp.maptec.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "place",
+      "label": "地点或关键词",
+      "placeholder": "例如：Marina Bay Sands Singapore",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "搜索地点",
+      "text": "使用 Maptec MCP 搜索与 {{place}} 相关的地点，列出名称、地址和坐标；只读查询。",
+      "server": "maptec"
+    },
+    {
+      "title": "规划路线",
+      "text": "使用 Maptec MCP 在我提供的两个坐标之间规划驾车路线，并说明距离与预计时间；若缺少起点或终点请先向我确认。",
+      "server": "maptec"
+    }
+  ]
+}

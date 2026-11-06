@@ -47,6 +47,30 @@ export const targets = [
     files: ['plugins/maptec-maps/plugin.json', 'plugins/maptec-maps/mcp.json'],
     flatten: true,
     setup: 'This package requires a host that supports custom-header API-key authentication. Configure your Maptec key through that host. Standard ChatGPT remote MCP setup does not currently provide this API-key configuration flow.'
+  },
+  {
+    id: 'workbuddy',
+    manifest: 'connector-meta.json',
+    files: [
+      'workbuddy/connector-meta.json',
+      'workbuddy/mcp.json',
+      'workbuddy/token-schema.json',
+      'workbuddy/icon.svg'
+    ],
+    destinations: {
+      'workbuddy/connector-meta.json': 'connector-meta.json',
+      'workbuddy/mcp.json': 'mcp.json',
+      'workbuddy/token-schema.json': 'token-schema.json',
+      'workbuddy/icon.svg': 'icon.svg'
+    },
+    setup: 'Submit this directory or ZIP as a WorkBuddy MCP Connector (MCP + Skill). Configure MAPTEC_API_KEY through the host token form. Endpoint: https://mcp.maptec.com/mcp . Use the raw API key in Authorization without Bearer.'
+  },
+  {
+    id: 'deepseek',
+    manifest: 'maptec-maps.connector.json',
+    files: ['deepseek/maptec-maps.connector.json', 'deepseek/README.md'],
+    destinations: { 'deepseek/maptec-maps.connector.json': 'maptec-maps.connector.json' },
+    setup: 'For DSH: install dsh-mcp-connector, then publish maptec-maps.connector.json to dsh-mcp-connector-registry as connectors/maptec-maps.json. Users connect with a Maptec API Key (Authorization header, raw key, no Bearer). See deepseek/README.md in the repository.'
   }
 ];
 

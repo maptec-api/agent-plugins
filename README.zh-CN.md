@@ -81,6 +81,16 @@ codex plugin marketplace add .
 
 详见 [ChatGPT / Codex 包说明](plugins/maptec-maps/README.md)。
 
+### WorkBuddy
+
+在 [WorkBuddy 开放平台](https://open.workbuddy.cn) 创建 **连接器（MCP + Skill）**，上传 Release 中的 `maptec-maps-workbuddy-<版本号>.zip`（含 `connector-meta.json`、`mcp.json`、`token-schema.json`、Skill 与图标）。用户通过 Token 表单填写 **Maptec API Key**（`Authorization` 使用原始 Key，不要加 Bearer）。
+
+### DeepSeek Harness
+
+1. 安装社区插件 **MCP 连接器**（[dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector)）。
+2. 将仓库内 [`deepseek/maptec-maps.connector.json`](deepseek/maptec-maps.connector.json) 提交到 [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) 的 `connectors/maptec-maps.json`（详见 [`deepseek/README.md`](deepseek/README.md)）。合并后在 DSH 的 MCP 连接器市场中刷新即可安装。
+3. Release 附件 `maptec-maps-deepseek-<版本号>.zip` 含上述描述符、Skill 与说明，便于内审或交接。
+
 ### 其他宿主安装包
 
 | 宿主 | 配置文件 | 连接要求 |
@@ -89,6 +99,8 @@ codex plugin marketplace add .
 | MiniMax | `.minimax-plugin/plugin.json` | 仅包含 Skill，需要宿主提供已鉴权的 Maptec 连接 |
 | ChatGPT | `plugins/maptec-maps/plugin.json`、`mcp.json` | 需要支持自定义请求头 API Key 的接入方式；ChatGPT 标准远程 MCP 配置流程目前不提供此选项 |
 | Open Plugins | `.plugin/plugin.json` | 需要兼容的宿主并配置 Maptec API Key |
+| WorkBuddy | `workbuddy/connector-meta.json` 等 | MCP + Skill 连接器包；Token 表单配置 API Key |
+| DeepSeek Harness | `deepseek/maptec-maps.connector.json` | Registry 收录后由 MCP 连接器一键连接 |
 
 ## MCP 连接配置
 
