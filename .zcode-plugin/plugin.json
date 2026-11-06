@@ -1,6 +1,6 @@
 {
   "name": "maptec-maps",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Search places, geocode addresses, and plan routes with Maptec.",
   "author": { "name": "云图知行", "email": "nikai@maptec.com" },
   "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",

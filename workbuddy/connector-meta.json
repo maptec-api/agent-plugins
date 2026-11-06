@@ -7,7 +7,7 @@
   "description_en": "Place search, geocoding, route planning, and related queries via Maptec remote MCP.",
   "source": "maptec",
   "type": "mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "minWorkbuddyVersion": "4.23.0",
   "auth_mode": "token",
   "examples_zh": [

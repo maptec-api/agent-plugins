@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "maptec-maps",
   "displayName": "Maptec Maps",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Search places, geocode addresses, and plan routes using a separately connected Maptec MCP server.",
   "author": "云图知行",
   "icon": "assets/icon.png",

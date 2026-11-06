@@ -1,6 +1,6 @@
 {
   "name": "@maptec/agent-plugins",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Maptec open-platform plugins for AI coding assistants",
   "type": "module",

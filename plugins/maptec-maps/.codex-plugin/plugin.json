@@ -1,6 +1,6 @@
 {
   "name": "maptec-maps",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
   "author": {
     "name": "云图知行",
