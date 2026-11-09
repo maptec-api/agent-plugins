@@ -95,7 +95,7 @@ Create an **MCP + Skill connector** on the [WorkBuddy Open Platform](https://ope
 
 | Host | Configuration | Connection requirements |
 |---|---|---|
-| ZCode | `.zcode-plugin/plugin.json` | Requires support for sensitive `maptec_api_key` settings, or a separately authenticated Maptec MCP connection with the Skill |
+| ZCode | `.zcode-plugin/plugin.json` | Configure `maptec_api_key` in plugin settings (marked non-sensitive), or use a separately authenticated Maptec MCP connection with the Skill |
 | MiniMax | `.minimax-plugin/plugin.json` | Skill only; requires an authenticated Maptec connection provided by the host |
 | ChatGPT | `plugins/maptec-maps/plugin.json` and `mcp.json` | Requires custom-header API-key support; standard ChatGPT remote MCP setup currently does not provide this configuration flow |
 | Open Plugins | `.plugin/plugin.json` | Requires a compatible host and Maptec API-key configuration |

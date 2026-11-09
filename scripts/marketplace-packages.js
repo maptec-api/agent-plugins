@@ -27,7 +27,7 @@ export const targets = [
     id: 'zcode',
     manifest: '.zcode-plugin/plugin.json',
     files: ['.zcode-plugin/plugin.json'],
-    setup: 'This package requires host support for sensitive plugin settings. Configure maptec_api_key through a supported secure credential flow. If your ZCode version cannot enter sensitive settings, use a separately authenticated Maptec MCP connection with the Skill.'
+    setup: 'Configure maptec_api_key in plugin settings (ZCode treats this field as non-sensitive). If you prefer not to store the key in settings, use a separately authenticated Maptec MCP connection with the Skill.'
   },
   {
     id: 'gemini',

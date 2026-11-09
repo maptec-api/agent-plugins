@@ -36,7 +36,11 @@ for (const target of targets) {
   }
   if (['claude', 'zcode'].includes(target.id)) {
     assert.equal(manifest.repository, 'https://github.com/maptec-api/agent-plugins');
-    assert.equal(manifest.userConfig.maptec_api_key.sensitive, true);
+    assert.equal(
+      manifest.userConfig.maptec_api_key.sensitive,
+      target.id === 'claude',
+      `${target.id}: maptec_api_key.sensitive must be true for Claude, false for ZCode`
+    );
     assert.equal(manifest.userConfig.maptec_api_key.required, true);
     assert.equal(manifest.mcpServers.maptec.type, 'http');
     assert.equal(manifest.mcpServers.maptec.headers.Authorization, '${user_config.maptec_api_key}');

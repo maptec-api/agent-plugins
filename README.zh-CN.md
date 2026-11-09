@@ -95,7 +95,7 @@ codex plugin marketplace add .
 
 | 宿主 | 配置文件 | 连接要求 |
 |---|---|---|
-| ZCode | `.zcode-plugin/plugin.json` | 需要支持 `maptec_api_key` 敏感设置；也可使用已单独鉴权的 Maptec MCP 连接配合 Skill |
+| ZCode | `.zcode-plugin/plugin.json` | 在插件设置中配置 `maptec_api_key`（当前为非敏感字段）；也可使用已单独鉴权的 Maptec MCP 连接配合 Skill |
 | MiniMax | `.minimax-plugin/plugin.json` | 仅包含 Skill，需要宿主提供已鉴权的 Maptec 连接 |
 | ChatGPT | `plugins/maptec-maps/plugin.json`、`mcp.json` | 需要支持自定义请求头 API Key 的接入方式；ChatGPT 标准远程 MCP 配置流程目前不提供此选项 |
 | Open Plugins | `.plugin/plugin.json` | 需要兼容的宿主并配置 Maptec API Key |

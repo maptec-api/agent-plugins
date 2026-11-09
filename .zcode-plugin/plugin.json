@@ -13,7 +13,7 @@
       "title": "Maptec API Key",
       "description": "Application API key from https://lbs.maptec.com/console/ . Enter the key itself, without Bearer.",
       "required": true,
-      "sensitive": true
+      "sensitive": false
     }
   },
   "mcpServers": {
