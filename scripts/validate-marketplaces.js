@@ -26,6 +26,14 @@ assert.equal(codebuddyPlugin.mcpServers.maptec.url, 'https://mcp.maptec.com/mcp'
 assert.equal(codebuddyPlugin.mcpServers.maptec.headers.Authorization, '${user_config.maptec_api_key}');
 assert.equal(codebuddyPlugin.extensions['ai.workbuddy'].schemaVersion, '1.0.0');
 assert.equal(codebuddyPlugin.extensions['ai.workbuddy'].policy.minWorkbuddyVersion, '4.23.0');
+const rootMcp = await readJson('.mcp.json');
+assert.equal(rootMcp.mcpServers.maptec.headers.Authorization, '${user_config.maptec_api_key}');
+const cursorMcp = await readJson('mcp.cursor.json');
+assert.equal(cursorMcp.mcpServers.maptec.headers.Authorization, '${MAPTEC_API_KEY}');
+const cursorPlugin = await readJson('.cursor-plugin/plugin.json');
+assert.equal(cursorPlugin.mcpServers, './mcp.cursor.json');
+const openPlugin = await readJson('.plugin/plugin.json');
+assert.equal(openPlugin.mcpServers, './mcp.cursor.json');
 for (const target of targets) {
   const directory = packageDirectory(target);
   const contentDirectory = target.contentRoot ? `${directory}/${target.contentRoot}` : directory;

@@ -93,7 +93,11 @@ WorkBuddy 有两条互不替代的安装通道：
 /plugin marketplace add maptec-api/agent-plugins
 /plugin install maptec-maps@maptec-open-plugins
 ```
-启用插件时通过 `userConfig.maptec_api_key` 填写 Key（清单优先读 `.codebuddy-plugin/plugin.json`）。插件通道**不会**读取 `workbuddy/token-schema.json`；若本机 `~/.workbuddy/mcp.json` 已手写 maptec，请先删掉或改用插件配置，否则可能跳过填 Key 弹窗。
+启用后在插件详情/配置里填写 `maptec_api_key`（清单优先 `.codebuddy-plugin/plugin.json`，根目录 `.mcp.json` 使用 `${user_config.maptec_api_key}`）。插件通道**不会**读 `workbuddy/token-schema.json`。
+
+安装后若仍无 Key 入口，请先：
+1. 从 `~/.workbuddy/mcp.json` **删除手写的 `maptec` 段**（否则会绕过插件配置）；
+2. `/plugin disable maptec-maps@maptec-open-plugins` 再 `/plugin enable maptec-maps@maptec-open-plugins`，或在插件页打开配置/重新启用。
 
 ### DeepSeek Harness
 

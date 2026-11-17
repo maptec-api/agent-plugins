@@ -1,7 +1,7 @@
 {
   "name": "maptec-maps",
   "displayName": "Maptec Maps",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Connect to Maptec MCP for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation.",
   "author": {
     "name": "云图知行",
@@ -21,7 +21,7 @@
   ],
   "category": "developer-tools",
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "mcpServers": "./mcp.cursor.json",
   "variables": {
     "type": "object",
     "properties": {

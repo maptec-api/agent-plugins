@@ -93,7 +93,11 @@ Create an **MCP + Skill connector** on the [WorkBuddy Open Platform](https://ope
 /plugin marketplace add maptec-api/agent-plugins
 /plugin install maptec-maps@maptec-open-plugins
 ```
-On enable, configure `userConfig.maptec_api_key` (manifest preference: `.codebuddy-plugin/plugin.json`). The plugin path does **not** read `workbuddy/token-schema.json`. If `~/.workbuddy/mcp.json` already defines a hardcoded maptec server, remove or replace it so the plugin prompt can run.
+After enable, set `maptec_api_key` in the plugin detail/config UI (prefer `.codebuddy-plugin/plugin.json`; root `.mcp.json` uses `${user_config.maptec_api_key}`). The plugin path does **not** read `workbuddy/token-schema.json`.
+
+If there is still no Key field:
+1. Remove any handwritten `maptec` entry from `~/.workbuddy/mcp.json` (it bypasses plugin config);
+2. Run `/plugin disable maptec-maps@maptec-open-plugins` then `/plugin enable maptec-maps@maptec-open-plugins`, or open Configure / re-enable in the plugin UI.
 
 ### DeepSeek Harness
 
