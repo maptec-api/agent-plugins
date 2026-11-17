@@ -1,0 +1,56 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "maptec-maps",
+  "version": "0.1.5",
+  "description": "Search places, geocode addresses, and plan routes with Maptec.",
+  "author": {
+    "name": "云图知行",
+    "email": "nikai@maptec.com"
+  },
+  "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
+  "repository": "https://github.com/maptec-api/agent-plugins",
+  "license": "MIT",
+  "keywords": ["maptec", "maps", "geocoding", "routes", "mcp", "skills"],
+  "skills": "./skills/",
+  "userConfig": {
+    "maptec_api_key": {
+      "type": "string",
+      "title": "Maptec API Key",
+      "description": "Application API key from https://lbs.maptec.com/console/ . Enter the key itself, without Bearer.",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "maptec": {
+      "type": "streamable-http",
+      "url": "https://mcp.maptec.com/mcp",
+      "headers": {
+        "Authorization": "${user_config.maptec_api_key}"
+      }
+    }
+  },
+  "extensions": {
+    "ai.workbuddy": {
+      "schemaVersion": "1.0.0",
+      "display": {
+        "name": "Maptec 地图",
+        "name_zh": "Maptec 地图",
+        "name_en": "Maptec Maps",
+        "description_zh": "通过 Maptec 官方远程 MCP 进行地点搜索、地理编码、路线规划、距离计算等查询。",
+        "description_en": "Place search, geocoding, route planning, and related queries via Maptec remote MCP.",
+        "examples_zh": [
+          "在新加坡坐标 1.2868,103.8545 附近 1000 米内找咖啡馆",
+          "把 Marina Bay Sands 解析成坐标并规划驾车路线"
+        ],
+        "examples_en": [
+          "Find cafes within 1000 m of 1.2868,103.8545 in Singapore",
+          "Geocode Marina Bay Sands and plan a driving route"
+        ]
+      },
+      "policy": {
+        "minWorkbuddyVersion": "4.23.0"
+      }
+    }
+  }
+}

@@ -83,7 +83,17 @@ codex plugin marketplace add .
 
 ### WorkBuddy
 
+WorkBuddy 有两条互不替代的安装通道：
+
+**1. 连接器（推荐上架官方连接器市场）**  
 在 [WorkBuddy 开放平台](https://open.workbuddy.cn) 创建 **连接器（MCP + Skill）**，上传 Release 中的 `maptec-maps-workbuddy-<版本号>.zip`（含 `connector-meta.json`、`mcp.json`、`token-schema.json`、Skill 与图标）。用户通过 Token 表单填写 **Maptec API Key**（`Authorization` 使用原始 Key，不要加 Bearer）。
+
+**2. 插件市场**  
+```text
+/plugin marketplace add maptec-api/agent-plugins
+/plugin install maptec-maps@maptec-open-plugins
+```
+启用插件时通过 `userConfig.maptec_api_key` 填写 Key（清单优先读 `.codebuddy-plugin/plugin.json`）。插件通道**不会**读取 `workbuddy/token-schema.json`；若本机 `~/.workbuddy/mcp.json` 已手写 maptec，请先删掉或改用插件配置，否则可能跳过填 Key 弹窗。
 
 ### DeepSeek Harness
 
@@ -99,7 +109,7 @@ codex plugin marketplace add .
 | MiniMax | `.minimax-plugin/plugin.json` | 仅包含 Skill，需要宿主提供已鉴权的 Maptec 连接 |
 | ChatGPT | `plugins/maptec-maps/plugin.json`、`mcp.json` | 需要支持自定义请求头 API Key 的接入方式；ChatGPT 标准远程 MCP 配置流程目前不提供此选项 |
 | Open Plugins | `.plugin/plugin.json` | 需要兼容的宿主并配置 Maptec API Key |
-| WorkBuddy | `workbuddy/connector-meta.json` 等 | MCP + Skill 连接器包；Token 表单配置 API Key |
+| WorkBuddy | `.codebuddy-plugin/plugin.json`（插件）或 `workbuddy/` ZIP（连接器） | 插件用 `userConfig`；连接器用 `token-schema` Token 表单 |
 | DeepSeek Harness | `deepseek/maptec-maps.connector.json` | Registry 收录后由 MCP 连接器一键连接 |
 
 ## MCP 连接配置

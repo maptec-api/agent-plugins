@@ -83,7 +83,17 @@ See the [ChatGPT / Codex package instructions](plugins/maptec-maps/README.md).
 
 ### WorkBuddy
 
+WorkBuddy has two separate install paths:
+
+**1. Connector (recommended for the official Connector marketplace)**  
 Create an **MCP + Skill connector** on the [WorkBuddy Open Platform](https://open.workbuddy.cn) and upload `maptec-maps-workbuddy-<version>.zip` from Releases. Users enter a **Maptec API Key** through the token form (`Authorization` uses the raw key without a `Bearer` prefix).
+
+**2. Plugin marketplace**  
+```text
+/plugin marketplace add maptec-api/agent-plugins
+/plugin install maptec-maps@maptec-open-plugins
+```
+On enable, configure `userConfig.maptec_api_key` (manifest preference: `.codebuddy-plugin/plugin.json`). The plugin path does **not** read `workbuddy/token-schema.json`. If `~/.workbuddy/mcp.json` already defines a hardcoded maptec server, remove or replace it so the plugin prompt can run.
 
 ### DeepSeek Harness
 
@@ -99,7 +109,7 @@ Create an **MCP + Skill connector** on the [WorkBuddy Open Platform](https://ope
 | MiniMax | `.minimax-plugin/plugin.json` | Skill only; requires an authenticated Maptec connection provided by the host |
 | ChatGPT | `plugins/maptec-maps/plugin.json` and `mcp.json` | Requires custom-header API-key support; standard ChatGPT remote MCP setup currently does not provide this configuration flow |
 | Open Plugins | `.plugin/plugin.json` | Requires a compatible host and Maptec API-key configuration |
-| WorkBuddy | `workbuddy/connector-meta.json`, etc. | MCP + Skill connector ZIP; token form for the API key |
+| WorkBuddy | `.codebuddy-plugin/plugin.json` (plugin) or `workbuddy/` ZIP (connector) | Plugin: `userConfig`; Connector: `token-schema` token form |
 | DeepSeek Harness | `deepseek/maptec-maps.connector.json` | Listed in the MCP connector registry after PR merge |
 
 ## MCP connection

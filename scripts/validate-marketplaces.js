@@ -11,6 +11,21 @@ assert.equal(claudeMarketplace.owner.name, '云图知行');
 assert.deepEqual(claudeMarketplace.plugins.find(plugin => plugin.name === 'maptec-maps')?.source, {
   source: 'github', repo: 'maptec-api/agent-plugins'
 });
+const codebuddyMarketplace = await readJson('.codebuddy-plugin/marketplace.json');
+assert.equal(codebuddyMarketplace.name, 'maptec-open-plugins');
+assert.deepEqual(codebuddyMarketplace.plugins.find(plugin => plugin.name === 'maptec-maps')?.source, {
+  source: 'github', repo: 'maptec-api/agent-plugins'
+});
+const codebuddyPlugin = await readJson('.codebuddy-plugin/plugin.json');
+assert.equal(codebuddyPlugin.name, 'maptec-maps');
+assert.equal(codebuddyPlugin.version, version);
+assert.equal(codebuddyPlugin.userConfig.maptec_api_key.sensitive, true);
+assert.equal(codebuddyPlugin.userConfig.maptec_api_key.required, true);
+assert.equal(codebuddyPlugin.mcpServers.maptec.type, 'streamable-http');
+assert.equal(codebuddyPlugin.mcpServers.maptec.url, 'https://mcp.maptec.com/mcp');
+assert.equal(codebuddyPlugin.mcpServers.maptec.headers.Authorization, '${user_config.maptec_api_key}');
+assert.equal(codebuddyPlugin.extensions['ai.workbuddy'].schemaVersion, '1.0.0');
+assert.equal(codebuddyPlugin.extensions['ai.workbuddy'].policy.minWorkbuddyVersion, '4.23.0');
 for (const target of targets) {
   const directory = packageDirectory(target);
   const contentDirectory = target.contentRoot ? `${directory}/${target.contentRoot}` : directory;
