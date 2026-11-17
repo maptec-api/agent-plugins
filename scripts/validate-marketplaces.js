@@ -89,8 +89,13 @@ for (const target of targets) {
     assert.equal(mcp.mcpServers.maptec.headers.Authorization, '${MAPTEC_API_KEY}');
     assert.equal(mcp.mcpServers.maptec.timeout, 30000);
     const tokenSchema = await readJson(`${directory}/token-schema.json`);
+    assert.equal(typeof tokenSchema.title, 'string');
+    assert.equal(typeof tokenSchema.description, 'string');
+    assert.equal(typeof tokenSchema.docUrl, 'string');
     assert.equal(tokenSchema.fields.length, 1);
     assert.equal(tokenSchema.fields[0].key, 'MAPTEC_API_KEY');
+    assert.equal(typeof tokenSchema.fields[0].label, 'string');
+    assert.equal(tokenSchema.fields[0].type, 'password');
     assert.equal(tokenSchema.fields[0].required, true);
     const icon = await readFile(`${directory}/icon.svg`, 'utf8');
     assert(icon.includes('<svg'), 'workbuddy: icon.svg must be SVG');
