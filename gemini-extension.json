@@ -1,6 +1,6 @@
 {
   "name": "maptec-maps",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Search places, geocode addresses, and plan routes with Maptec.",
   "settings": [
     {

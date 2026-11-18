@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "maptec-maps",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Search places, geocode addresses, and plan routes with Maptec.",
   "author": {
     "name": "云图知行",

@@ -1,9 +1,9 @@
 ---
 name: maptec-maps
-description: Search places and nearby businesses, resolve addresses or coordinates, plan routes, compare travel distances, match road tracks, and locate IP addresses using Maptec MCP. Use when Maptec is requested or is the connected map provider, including mapping requests that do not mention Maptec by name.
-description_zh: 使用 Maptec MCP 进行地点与周边搜索、地理编码、路线规划、距离计算、轨迹绑路与 IP 定位；当用户需要地图、路线、地址或坐标查询时使用。
+description: Search places and nearby businesses, resolve addresses or coordinates, plan routes, compare travel distances, search along a route, match road tracks, locate IP addresses, and render map previews using Maptec MCP. Use when Maptec is requested or is the connected map provider, including mapping requests that do not mention Maptec by name.
+description_zh: 使用 Maptec MCP 进行地点与周边搜索、地理编码、路线规划、距离计算、沿途搜索、轨迹绑路、IP 定位与地图预览；当用户需要地图、路线、地址或坐标查询时使用。
 description_en: Search places, geocode, plan routes, and related map tasks with Maptec MCP; use for map, routing, address, or coordinate requests.
-version: 0.1.6
+version: 0.2.0
 author: 云图知行
 ---
 
@@ -13,7 +13,153 @@ If the connection needs credentials, direct the user to the host's secure connec
 
 Ask only for information needed for the requested operation. Use locations and coordinates already supplied in the conversation. Clarify an ambiguous city or place only when it would materially change the result. Ask for a search center when a nearby request lacks one, and obtain missing origin or destination for routing; never assume the user's current location. Place search and geocoding do not require a route starting point or travel mode. For routing, clarify the mode when necessary; if using a documented default, state the mode used.
 
-Choose tools by the user's goal. The following names are examples; the current connection's discovered tools and schemas are authoritative.
+## Tool reference
+
+The tables below document the current published tool set. The connection's discovered tools and schemas remain authoritative; treat these as reference, not as a substitute for discovery.
+
+### map_search_text — text place search
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `query` | string | yes | Search keywords |
+| `pageSize` | integer | no | Results per page, 1-20 |
+| `region` | string | no | Region code, e.g. `SG` |
+| `language` | string | no | Language code |
+| `locationBias` | object | no | Preference area. Circle uses `center` + `radius`, rectangle uses `northeast` + `southwest`. Mutually exclusive with `locationLimit` |
+| `locationLimit` | object | no | Restriction area. Same shape rules as `locationBias`. Mutually exclusive with `locationBias` |
+| `rank` | string | no | Ranking, e.g. `RELEVANCE` |
+
+`locationBias` / `locationLimit` shape: `center`, `northeast`, and `southwest` take `{ "latitude": number, "longitude": number }`; `radius` is meters, 0-50000.
+
+### map_search_nearby — nearby search
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `locationLimit` | object | yes | Circle only, must contain both `center` and `radius` |
+| `query` | string | no | Search keywords, optional |
+| `resultLimit` | integer | no | Result cap, 1-20 |
+| `language` | string | no | Language code |
+| `region` | string | no | Region code |
+
+### map_search_along_route — search along a route
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `route` | object | yes | Route object, typically `{ "encodedPolyline": "..." }` taken from `map_routes_directions` `overviewPolyline` |
+| `query` | string | no | Search keywords; at least one of `query` or `types` |
+| `types` | string | no | Type filter; at least one of `query` or `types` |
+| `routeBufferMeters` | integer | no | Route buffer distance in meters, e.g. 1500 |
+| `evaluationMode` | string | no | Evaluation mode, e.g. `STANDARD` |
+| `resultLimit` | integer | no | Result cap, 1-20 |
+| `language` | string | no | Language code |
+| `region` | string | no | Region code |
+
+### map_search_suggest — input suggestions
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `query` | string | yes | Input keywords |
+| `resultLimit` | integer | no | Result cap, 1-20 |
+| `language` | string | no | Language code |
+| `region` | string | no | Region code |
+| `locationBias` | object | no | Preference area, same shape as `map_search_text` |
+| `locationLimit` | object | no | Restriction area, same shape as `map_search_text` |
+
+### map_search_places — place details
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `placeId` | string | yes | Place ID from a previous search result |
+| `language` | string | no | Language code |
+| `region` | string | no | Region code |
+| `sessionToken` | string | no | Session token |
+| `includeExtraFields` | boolean | no | Whether to include extra fields |
+| `entry` | string | no | Entry identifier |
+| `extraFields` | array | no | Additional returned fields |
+
+### map_search_geocode — forward geocoding
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `address` | string | no | Free-form address |
+| `components` | string | no | Component filter |
+| `locationBias` | string | no | Rectangle as a JSON string, e.g. `{"northeast":{"latitude":1.3,"longitude":103.9},"southwest":{"latitude":1.2,"longitude":103.6}}`. Circle is not accepted here |
+| `language` | string | no | Language code |
+| `region` | string | no | Region code |
+
+### map_search_reverse — reverse geocoding
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `location` | string | yes | `"latitude,longitude"` as a string, e.g. `1.3521,103.8198` |
+| `resultType` | string | no | Result type, multiple values joined by `|` |
+| `locationType` | string | no | `ROOFTOP`, `INTERPOLATED`, `CENTER`; multiple values joined by `|` |
+| `language` | string | no | Language code |
+| `region` | string | no | Region code |
+
+### map_routes_directions — route planning
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `origin` | object | yes | `{ "location": { "latitude": number, "longitude": number } }` |
+| `destination` | object | yes | `{ "location": { "latitude": number, "longitude": number } }` |
+| `waypoints` | array | no | Waypoints, up to 25, same `location` shape |
+| `mode` | string | no | `driving` / `truck` / `cycling` / `walking`; defaults to `driving` |
+| `strategy` | string | no | `fastest` / `shortest` / `eco` / `balanced` |
+| `departureTime` | string | no | Departure time |
+| `trafficEnabled` | boolean | no | Whether to consider traffic |
+
+### map_matrix_distance — distance and duration matrix
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `origins` | array | yes | Origin points, up to 25; each `{ "lat": number, "lng"?: number, "lon"?: number }` |
+| `destinations` | array | yes | Destination points, up to 25; same shape; origins × destinations must not exceed 625 |
+| `mode` | string | no | `driving` / `truck` / `walking` / `cycling`; defaults to `driving` |
+| `strategy` | string | no | Route strategy |
+| `trafficEnabled` | boolean | no | Field name is `trafficEnabled`, not `traffic_enabled` |
+| `departureTime` | string | no | ISO-8601, e.g. `2025-10-31T10:00:00Z` |
+| `async` | boolean | no | Asynchronous mode |
+| `callbackUrl` | string | no | HTTPS callback URL for async mode |
+| `truckParams` | object | no | Truck parameters: `height`, `weight`, `width`, `length`, `axle_count` (integer >= 1), `hazardous` |
+
+### map_track_snap_to_roads — track matching
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `points` | array | yes | 2-500 track points, each `{ "latitude": number, "longitude": number }` |
+
+### map_location_ip — IP geolocation
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `ip` | string | yes | IPv4 or IPv6 address |
+| `output` | string | no | Output format, e.g. `json` |
+| `coord_type` | string | no | Coordinate system, e.g. `wgs84` |
+
+### map_ui_compose_scene — build a map scene
+
+Assembles place markers and routes into a MapScene for browser rendering. It performs no search or routing call.
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `center` | array | no | Map center as `[lng, lat]` |
+| `zoom` | number | no | Zoom level, defaults to 14 |
+| `style` | string | no | Map style URL |
+| `markers` | array | no | Markers: `id`, `lngLat` as `[lng, lat]`, or `latitude` / `longitude`, `title`, `placeId` |
+| `routes` | array | no | Routes: `id`, `encodedPolyline` (required), `mode`, `color` |
+| `fitBounds` | boolean | no | Whether to fit bounds, defaults to true |
+
+### map_ui_preview_html — render a map preview page
+
+| Parameter | Type | Required | Description |
+| --- | --- | :---: | --- |
+| `scene` | object | yes | MapScene v1 JSON, typically from `map_ui_compose_scene` |
+| `title` | string | no | Page title |
+
+The generated page contains no server-side API key; basemap authentication is configured on the browser side (for example via `?key=`).
+
+## Choosing tools
 
 | User goal | Tool choice |
 |---|---|
@@ -21,11 +167,13 @@ Choose tools by the user's goal. The following names are examples; the current c
 | Convert a street address to coordinates | Geocoding, such as `map_search_geocode` |
 | Find an address for supplied coordinates | Reverse geocoding, such as `map_search_reverse` |
 | Find businesses around a location | Nearby search, such as `map_search_nearby`; resolve a named search center to coordinates first if needed |
+| Find businesses or services along a planned route | Along-route search, such as `map_search_along_route`, using the `overviewPolyline` returned by the route |
 | Get more information about a returned place | Place details, such as `map_search_places`, using an actual returned place ID |
 | Plan a route between locations | Directions, such as `map_routes_directions`; resolve named endpoints to suitable coordinates if needed |
 | Compare travel distances or times across origins and destinations | Distance matrix, such as `map_matrix_distance` |
 | Align supplied track points to roads | Map matching, such as `map_track_snap_to_roads`, preserving the supplied point order |
 | Look up the approximate location of a supplied IP address | IP geolocation, such as `map_location_ip`; do not present it as an exact device or live GPS location |
+| Show the user an actual map of the results | Compose a scene with `map_ui_compose_scene`, then render it with `map_ui_preview_html` |
 
 Preserve the coordinate order, coordinate system, and units defined by each tool; do not silently swap latitude and longitude or convert coordinate systems. Distinguish route distance from straight-line distance. Include duration or traffic timing only when returned by the service. Do not invent tools, parameters, ratings, opening hours, results, or routes.
 

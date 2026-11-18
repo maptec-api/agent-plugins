@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-**Maptec Maps**, by **云图知行**, connects AI assistants to Maptec for place search, geocoding, route planning, distance calculation, map matching, and IP geolocation. Available capabilities depend on the tools exposed by your connected MCP server.
+**Maptec Maps**, by **云图知行**, connects AI assistants to Maptec for place search, geocoding, route planning, distance calculation, along-route search, map matching, IP geolocation, and map preview rendering. Available capabilities depend on the tools exposed by your connected MCP server.
 
 Source: [maptec-api/agent-plugins](https://github.com/maptec-api/agent-plugins).
 
