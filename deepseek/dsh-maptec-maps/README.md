@@ -10,7 +10,15 @@ From this repository checkout:
 dsh plugin --profile web add ./deepseek/dsh-maptec-maps
 ```
 
-From Git (pin a commit in production):
+From GitHub (whole repository — use this in the DSH “install from GitHub” UI):
+
+```bash
+dsh plugin --profile web add 'github:maptec-api/agent-plugins#<commit-sha>'
+```
+
+The repository root `package.json` declares `dsh.bundle` and points at this directory’s `cordis.patch.yml`. Pin a commit SHA in production.
+
+Subdirectory-only install (optional):
 
 ```bash
 dsh plugin --profile web add 'github:maptec-api/agent-plugins#path:deepseek/dsh-maptec-maps&commit=<sha>'

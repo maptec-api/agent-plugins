@@ -5,6 +5,13 @@ import { destinationPath, listFiles, packageDirectory, readJson, targets } from 
 import { validateSkill } from './validate-skills.js';
 
 const version = (await readJson('package.json')).version;
+const rootPackage = await readJson('package.json');
+assert.equal(rootPackage.dsh?.bundle?.patch, './deepseek/dsh-maptec-maps/cordis.patch.yml');
+assert.deepEqual(
+  await readFile('deepseek/dsh-maptec-maps/skills/maptec-maps/SKILL.md'),
+  await readFile('skills/maptec-maps/SKILL.md'),
+  'deepseek/dsh-maptec-maps: committed bundled skill must match skills/maptec-maps/SKILL.md'
+);
 const claudeMarketplace = await readJson('.claude-plugin/marketplace.json');
 assert.equal(claudeMarketplace.name, 'maptec-open-plugins');
 assert.equal(claudeMarketplace.owner.name, '云图知行');

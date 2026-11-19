@@ -103,7 +103,7 @@ WorkBuddy 有两条互不替代的安装通道：
 
 **推荐：DSH bundle 插件**
 
-1. 安装 bundle：`dsh plugin --profile web add ./deepseek/dsh-maptec-maps`（或 Release ZIP 内 `dsh-maptec-maps/` 目录）。详见 [`deepseek/dsh-maptec-maps/README.md`](deepseek/dsh-maptec-maps/README.md)。
+1. 安装 bundle：本地 `dsh plugin --profile web add ./deepseek/dsh-maptec-maps`；从 GitHub 填 `maptec-api/agent-plugins` 或 `dsh plugin --profile web add 'github:maptec-api/agent-plugins#<commit>'`（须用仓库根目录，子目录包不可直接在 UI 里填整仓 URL）。详见 [`deepseek/dsh-maptec-maps/README.md`](deepseek/dsh-maptec-maps/README.md)。
 2. 启动 DSH 前设置环境变量 `MAPTEC_API_KEY`（原始 Key，不要加 `Bearer`），然后完全重启 Harness。
 3. MCP 工具名为 `mcp__maptec__*`；内置 Skill 可用 `/maptec-maps` 调用。
 

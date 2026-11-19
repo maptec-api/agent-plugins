@@ -103,7 +103,7 @@ If there is still no Key field:
 
 **Recommended: DSH bundle plugin**
 
-1. Install the bundle: `dsh plugin --profile web add ./deepseek/dsh-maptec-maps` (or the `dsh-maptec-maps/` directory from the Release ZIP). See [`deepseek/dsh-maptec-maps/README.md`](deepseek/dsh-maptec-maps/README.md).
+1. Install the bundle: locally `dsh plugin --profile web add ./deepseek/dsh-maptec-maps`, or from GitHub `dsh plugin --profile web add 'github:maptec-api/agent-plugins#<commit>'` (the repo root declares `dsh.bundle`; do not install the monorepo root without that declaration). See [`deepseek/dsh-maptec-maps/README.md`](deepseek/dsh-maptec-maps/README.md).
 2. Set `MAPTEC_API_KEY` (raw key, no `Bearer`) in the environment before starting DSH, then fully restart Harness.
 3. MCP tools appear as `mcp__maptec__*`. Invoke the bundled skill with `/maptec-maps`.
 

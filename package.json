@@ -19,6 +19,12 @@
     "url": "https://github.com/maptec-api/agent-plugins"
   },
   "license": "MIT",
+  "main": "./deepseek/dsh-maptec-maps/index.js",
+  "dsh": {
+    "bundle": {
+      "patch": "./deepseek/dsh-maptec-maps/cordis.patch.yml"
+    }
+  },
   "devDependencies": {
     "yaml": "^2.9.1"
   }
