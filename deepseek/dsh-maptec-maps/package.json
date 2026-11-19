@@ -1,0 +1,37 @@
+{
+  "name": "dsh-maptec-maps",
+  "version": "0.2.0",
+  "description": "Maptec Maps remote MCP and bundled Skill for DeepSeek Harness",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "skills",
+    "README.md"
+  ],
+  "author": "云图知行",
+  "license": "MIT",
+  "homepage": "https://lbs.maptec.com/docs/en-US/mcp/introduction",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maptec-api/agent-plugins.git",
+    "directory": "deepseek/dsh-maptec-maps"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "maptec",
+    "maps",
+    "mcp",
+    "geocoding"
+  ],
+  "engines": {
+    "dsh": ">=0.2.0-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

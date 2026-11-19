@@ -6,3 +6,6 @@ dist/
 plugins/maptec-maps/skills/
 plugins/maptec-maps/assets/
 plugins/maptec-maps/.mcp.json
+
+# Synced from skills/maptec-maps/ during npm run build:marketplaces
+deepseek/dsh-maptec-maps/skills/

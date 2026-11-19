@@ -68,9 +68,17 @@ export const targets = [
   {
     id: 'deepseek',
     manifest: 'maptec-maps.connector.json',
-    files: ['deepseek/maptec-maps.connector.json', 'deepseek/README.md'],
+    files: [
+      'deepseek/maptec-maps.connector.json',
+      'deepseek/README.md',
+      'deepseek/dsh-maptec-maps/package.json',
+      'deepseek/dsh-maptec-maps/cordis.patch.yml',
+      'deepseek/dsh-maptec-maps/index.js',
+      'deepseek/dsh-maptec-maps/README.md',
+      'deepseek/dsh-maptec-maps/skills'
+    ],
     destinations: { 'deepseek/maptec-maps.connector.json': 'maptec-maps.connector.json' },
-    setup: 'For DSH: install dsh-mcp-connector, then publish maptec-maps.connector.json to dsh-mcp-connector-registry as connectors/maptec-maps.json. Users connect with a Maptec API Key (Authorization header, raw key, no Bearer). See deepseek/README.md in the repository.'
+    setup: 'Install the DSH bundle: dsh plugin --profile web add ./dsh-maptec-maps (or from this release directory). Set MAPTEC_API_KEY to your Maptec application key (raw value, no Bearer), restart DSH. Optional: submit maptec-maps.connector.json to dsh-mcp-connector-registry for the MCP connector market. See deepseek/README.md.'
   }
 ];
 

@@ -1,0 +1,16 @@
+# Maptec Maps DSH bundle: Streamable HTTP MCP + bundled maptec-maps skill.
+- insert:
+    - id: maptec-maps-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: maptec
+        transport: streamable-http
+        url: https://mcp.maptec.com/mcp
+        headers:
+          Accept: application/json, text/event-stream
+          Authorization: !!js process.env.MAPTEC_API_KEY
+        expandTemplates: true
+    - id: maptec-maps-skills
+      name: '@deepseek-ai/dsh-skill-filesystem'
+      config:
+        bundledSkillDir: ./skills

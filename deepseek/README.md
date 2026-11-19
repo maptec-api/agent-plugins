@@ -1,18 +1,37 @@
 # DeepSeek Harness (DSH) — Maptec Maps
 
-Maptec remote MCP for DeepSeek Harness via the community **MCP 连接器** plugin (`dsh-mcp-connector`).
+Two install paths:
 
-## User install
+| Path | Artifact | Best for |
+| --- | --- | --- |
+| **DSH bundle plugin** (recommended) | [`dsh-maptec-maps/`](./dsh-maptec-maps/) | `dsh plugin add` — MCP + bundled Skill in one bundle |
+| **MCP connector market** | [`maptec-maps.connector.json`](./maptec-maps.connector.json) | Users who already use `dsh-mcp-connector` |
 
-1. Install the MCP connector plugin in DSH (see [dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector)).
-2. Open **MCP 连接器**, refresh the catalog, and find **Maptec 地图** after the registry entry is published.
-3. Connect with your [Maptec application API Key](https://lbs.maptec.com/console/). Use the raw key in `Authorization` without a `Bearer` prefix.
+## User install — DSH bundle
+
+1. Install the bundle into your profile (adjust profile name if needed):
+
+   ```bash
+   dsh plugin --profile web add ./deepseek/dsh-maptec-maps
+   ```
+
+   From Git: `dsh plugin --profile web add 'github:maptec-api/agent-plugins#path:deepseek/dsh-maptec-maps'`
+
+2. Set your [Maptec application API Key](https://lbs.maptec.com/console/) as `MAPTEC_API_KEY` (raw key, **no** `Bearer` prefix) in the environment, then fully restart DSH.
+
+3. Tools are exposed as `mcp__maptec__*`. Use the bundled skill via `/maptec-maps` when skills are enabled.
 
 Endpoint: `https://mcp.maptec.com/mcp` (Streamable HTTP).
 
-Optional: install the Skill from this repository with `npx skills add maptec-api/agent-plugins --skill maptec-maps`, or use the Skill bundled in the `maptec-maps-deepseek-*.zip` release artifact.
+See [`dsh-maptec-maps/README.md`](./dsh-maptec-maps/README.md) for details.
 
-## Publish to the public registry
+## User install — MCP connector market
+
+1. Install the MCP connector plugin in DSH ([dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector)).
+2. Open **MCP 连接器**, refresh the catalog, and find **Maptec 地图** after the registry entry is published.
+3. Connect with the same Maptec API Key rules as above.
+
+## Publish to the public connector registry
 
 The canonical descriptor for [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) is [`maptec-maps.connector.json`](./maptec-maps.connector.json).
 
@@ -25,4 +44,4 @@ Do not commit real API keys in the descriptor. After merge, users refresh the MC
 
 ## Release ZIP
 
-`npm run package:marketplaces` builds `dist/marketplaces/maptec-maps-deepseek-<version>.zip` containing this descriptor, the shared Skill, icons, and install notes for internal handoff or review bundles.
+`npm run package:marketplaces` builds `dist/marketplaces/maptec-maps-deepseek-<version>.zip` with the connector descriptor, the `dsh-maptec-maps` bundle, Skill, icons, and install notes for handoff or review.

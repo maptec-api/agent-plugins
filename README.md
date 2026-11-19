@@ -101,9 +101,18 @@ If there is still no Key field:
 
 ### DeepSeek Harness
 
-1. Install the community **MCP connector** plugin ([dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector)).
-2. Publish [`deepseek/maptec-maps.connector.json`](deepseek/maptec-maps.connector.json) to [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) as `connectors/maptec-maps.json` ([`deepseek/README.md`](deepseek/README.md)).
-3. Use `maptec-maps-deepseek-<version>.zip` from Releases for review handoff; it bundles the descriptor, Skill, and notes.
+**Recommended: DSH bundle plugin**
+
+1. Install the bundle: `dsh plugin --profile web add ./deepseek/dsh-maptec-maps` (or the `dsh-maptec-maps/` directory from the Release ZIP). See [`deepseek/dsh-maptec-maps/README.md`](deepseek/dsh-maptec-maps/README.md).
+2. Set `MAPTEC_API_KEY` (raw key, no `Bearer`) in the environment before starting DSH, then fully restart Harness.
+3. MCP tools appear as `mcp__maptec__*`. Invoke the bundled skill with `/maptec-maps`.
+
+**Optional: MCP connector market**
+
+1. Install [dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector).
+2. Publish [`deepseek/maptec-maps.connector.json`](deepseek/maptec-maps.connector.json) to [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) ([`deepseek/README.md`](deepseek/README.md)).
+
+Release artifact `maptec-maps-deepseek-<version>.zip` includes the bundle, connector descriptor, Skill, and notes.
 
 ### Other host packages
 
@@ -114,7 +123,7 @@ If there is still no Key field:
 | ChatGPT | `plugins/maptec-maps/plugin.json` and `mcp.json` | Requires custom-header API-key support; standard ChatGPT remote MCP setup currently does not provide this configuration flow |
 | Open Plugins | `.plugin/plugin.json` | Requires a compatible host and Maptec API-key configuration |
 | WorkBuddy | `.codebuddy-plugin/plugin.json` (plugin) or `workbuddy/` ZIP (connector) | Plugin: `userConfig`; Connector: `token-schema` token form |
-| DeepSeek Harness | `deepseek/maptec-maps.connector.json` | Listed in the MCP connector registry after PR merge |
+| DeepSeek Harness | `deepseek/dsh-maptec-maps/` (bundle) or `deepseek/maptec-maps.connector.json` (connector market) | Bundle: `MAPTEC_API_KEY`; connector market: after registry PR merge |
 
 ## MCP connection
 

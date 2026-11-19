@@ -101,9 +101,18 @@ WorkBuddy 有两条互不替代的安装通道：
 
 ### DeepSeek Harness
 
+**推荐：DSH bundle 插件**
+
+1. 安装 bundle：`dsh plugin --profile web add ./deepseek/dsh-maptec-maps`（或 Release ZIP 内 `dsh-maptec-maps/` 目录）。详见 [`deepseek/dsh-maptec-maps/README.md`](deepseek/dsh-maptec-maps/README.md)。
+2. 启动 DSH 前设置环境变量 `MAPTEC_API_KEY`（原始 Key，不要加 `Bearer`），然后完全重启 Harness。
+3. MCP 工具名为 `mcp__maptec__*`；内置 Skill 可用 `/maptec-maps` 调用。
+
+**可选：MCP 连接器市场**
+
 1. 安装社区插件 **MCP 连接器**（[dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector)）。
-2. 将仓库内 [`deepseek/maptec-maps.connector.json`](deepseek/maptec-maps.connector.json) 提交到 [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) 的 `connectors/maptec-maps.json`（详见 [`deepseek/README.md`](deepseek/README.md)）。合并后在 DSH 的 MCP 连接器市场中刷新即可安装。
-3. Release 附件 `maptec-maps-deepseek-<版本号>.zip` 含上述描述符、Skill 与说明，便于内审或交接。
+2. 将 [`deepseek/maptec-maps.connector.json`](deepseek/maptec-maps.connector.json) 提交到 [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry)（详见 [`deepseek/README.md`](deepseek/README.md)）。
+
+Release 附件 `maptec-maps-deepseek-<版本号>.zip` 含 bundle、连接器描述符、Skill 与说明。
 
 ### 其他宿主安装包
 
@@ -114,7 +123,7 @@ WorkBuddy 有两条互不替代的安装通道：
 | ChatGPT | `plugins/maptec-maps/plugin.json`、`mcp.json` | 需要支持自定义请求头 API Key 的接入方式；ChatGPT 标准远程 MCP 配置流程目前不提供此选项 |
 | Open Plugins | `.plugin/plugin.json` | 需要兼容的宿主并配置 Maptec API Key |
 | WorkBuddy | `.codebuddy-plugin/plugin.json`（插件）或 `workbuddy/` ZIP（连接器） | 插件用 `userConfig`；连接器用 `token-schema` Token 表单 |
-| DeepSeek Harness | `deepseek/maptec-maps.connector.json` | Registry 收录后由 MCP 连接器一键连接 |
+| DeepSeek Harness | `deepseek/dsh-maptec-maps/`（bundle）或 `deepseek/maptec-maps.connector.json`（连接器市场） | Bundle：`MAPTEC_API_KEY`；连接器市场：Registry PR 合并后一键连接 |
 
 ## MCP 连接配置
 

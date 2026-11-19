@@ -137,6 +137,20 @@ for (const target of targets) {
     assert.equal(manifest.servers[0].url, 'https://mcp.maptec.com/mcp');
     assert.equal(manifest.servers[0].headers?.Authorization, undefined);
     assert((await readFile(`${directory}/deepseek/README.md`, 'utf8')).includes('dsh-mcp-connector-registry'));
+    const dshBundle = await readJson(`${directory}/deepseek/dsh-maptec-maps/package.json`);
+    assert.equal(dshBundle.name, 'dsh-maptec-maps');
+    assert.equal(dshBundle.version, version);
+    assert.equal(dshBundle.dsh?.bundle?.patch, './cordis.patch.yml');
+    const patch = await readFile(`${directory}/deepseek/dsh-maptec-maps/cordis.patch.yml`, 'utf8');
+    assert(patch.includes('dsh-mcp-client'));
+    assert(patch.includes('https://mcp.maptec.com/mcp'));
+    assert(patch.includes('MAPTEC_API_KEY'));
+    assert(patch.includes('bundledSkillDir: ./skills'));
+    assert.deepEqual(
+      await readFile(`${directory}/deepseek/dsh-maptec-maps/skills/maptec-maps/SKILL.md`),
+      await readFile('skills/maptec-maps/SKILL.md'),
+      'deepseek: bundled skill must match skills/maptec-maps/SKILL.md'
+    );
   }
 
   const expectedFiles = ['README.md'];

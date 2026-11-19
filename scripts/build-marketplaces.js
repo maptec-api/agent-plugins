@@ -3,7 +3,18 @@ import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { destinationPath, packageDirectory, readJson, targets } from './marketplace-packages.js';
 
+const version = (await readJson('package.json')).version;
+
 for (const target of targets) {
+  if (target.id === 'deepseek') {
+    const bundleRoot = 'deepseek/dsh-maptec-maps';
+    await rm(`${bundleRoot}/skills`, { recursive: true, force: true });
+    await mkdir(`${bundleRoot}/skills/maptec-maps`, { recursive: true });
+    await cp('skills/maptec-maps/SKILL.md', `${bundleRoot}/skills/maptec-maps/SKILL.md`);
+    const bundlePackage = await readJson(`${bundleRoot}/package.json`);
+    bundlePackage.version = version;
+    await writeFile(`${bundleRoot}/package.json`, `${JSON.stringify(bundlePackage, null, 2)}\n`);
+  }
   const directory = packageDirectory(target);
   // Only replace this script's fixed, generated target directories.
   await rm(directory, { recursive: true, force: true });
