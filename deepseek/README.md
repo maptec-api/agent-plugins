@@ -42,7 +42,13 @@ Canonical descriptor: [`maptec-maps.connector.json`](./maptec-maps.connector.jso
 
 1. Fork [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) and branch, e.g. `add-maptec-maps`.
 2. Copy **this file** to `connectors/maptec-maps.json` (`id` must be `maptec-maps`).
-3. Locally (Node 24 recommended):
+3. Locally (Node 24 recommended), or from this repo:
+
+   ```bash
+   ./scripts/prepare-dsh-registry-pr.sh
+   ```
+
+   Then push the printed `$WORK` checkout to your fork and open the PR. Manual equivalent:
 
    ```bash
    npm ci --legacy-peer-deps

@@ -138,7 +138,7 @@ for (const target of targets) {
     assert.equal(manifest.auth.mode, 'api-key');
     assert.equal(manifest.auth.apiKeyHeader, 'Authorization');
     assert.equal(manifest.auth.credentialHelpUrl, 'https://lbs.maptec.com/console/');
-    assert(manifest.icon.startsWith('https://'), 'deepseek connector: icon should be HTTPS logo URL');
+    assert.match(manifest.icon, /^https:\/\/cdn\.jsdelivr\.net\/gh\/maptec-api\/agent-plugins@[0-9a-f]{7,}\/assets\/logo\.png$/, 'deepseek connector: icon should be pinned jsDelivr logo URL');
     assert.equal(manifest.servers.length, 1);
     assert.equal(manifest.servers[0].serverKey, 'maptec');
     assert.equal(manifest.servers[0].serverName, 'maptec-maps');
