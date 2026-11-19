@@ -15,6 +15,7 @@
         "source": "github",
         "repo": "maptec-api/agent-plugins"
       },
+      "logo": "assets/logo.png",
       "keywords": ["maptec", "maps", "geocoding", "routes", "mcp"]
     }
   ]

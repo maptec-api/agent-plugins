@@ -120,9 +120,12 @@ for (const target of targets) {
     assert.equal(typeof tokenSchema.fields[0].label, 'string');
     assert.equal(tokenSchema.fields[0].type, 'password');
     assert.equal(tokenSchema.fields[0].required, true);
-    const icon = await readFile(`${directory}/icon.svg`, 'utf8');
-    assert(icon.includes('<svg'), 'workbuddy: icon.svg must be SVG');
-    assert(icon.length <= 64 * 1024, 'workbuddy: icon.svg too large');
+    const icon = await readFile(`${directory}/icon.png`);
+    assert.equal(icon.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', 'workbuddy: icon.png must be PNG');
+    assert.equal(icon.readUInt32BE(16), icon.readUInt32BE(20), 'workbuddy: icon.png must be square');
+    assert(icon.readUInt32BE(16) >= 48 && icon.readUInt32BE(16) <= 4096);
+    assert(icon.length <= 5 * 1024 * 1024, 'workbuddy: icon.png too large');
+    assert.deepEqual(icon, await readFile('assets/logo.png'), 'workbuddy: icon.png must match assets/logo.png');
   }
   if (target.id === 'deepseek') {
     assert.equal(manifest.auth.mode, 'api-key');

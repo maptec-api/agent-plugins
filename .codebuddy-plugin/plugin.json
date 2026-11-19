@@ -11,6 +11,7 @@
   "repository": "https://github.com/maptec-api/agent-plugins",
   "license": "MIT",
   "keywords": ["maptec", "maps", "geocoding", "routes", "mcp", "skills"],
+  "icon": "./assets/logo.png",
   "skills": "./skills/",
   "userConfig": {
     "maptec_api_key": {

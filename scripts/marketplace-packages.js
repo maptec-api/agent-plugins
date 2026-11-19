@@ -55,13 +55,13 @@ export const targets = [
       'workbuddy/connector-meta.json',
       'workbuddy/mcp.json',
       'workbuddy/token-schema.json',
-      'workbuddy/icon.svg'
+      'assets/logo.png'
     ],
     destinations: {
       'workbuddy/connector-meta.json': 'connector-meta.json',
       'workbuddy/mcp.json': 'mcp.json',
       'workbuddy/token-schema.json': 'token-schema.json',
-      'workbuddy/icon.svg': 'icon.svg'
+      'assets/logo.png': 'icon.png'
     },
     setup: 'Submit this directory or ZIP as a WorkBuddy MCP Connector (MCP + Skill). Configure MAPTEC_API_KEY through the host token form. Endpoint: https://mcp.maptec.com/mcp . Use the raw API key in Authorization without Bearer.'
   },
