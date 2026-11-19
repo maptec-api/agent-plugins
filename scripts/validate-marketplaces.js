@@ -137,6 +137,8 @@ for (const target of targets) {
   if (target.id === 'deepseek') {
     assert.equal(manifest.auth.mode, 'api-key');
     assert.equal(manifest.auth.apiKeyHeader, 'Authorization');
+    assert.equal(manifest.auth.credentialHelpUrl, 'https://lbs.maptec.com/console/');
+    assert(manifest.icon.startsWith('https://'), 'deepseek connector: icon should be HTTPS logo URL');
     assert.equal(manifest.servers.length, 1);
     assert.equal(manifest.servers[0].serverKey, 'maptec');
     assert.equal(manifest.servers[0].serverName, 'maptec-maps');

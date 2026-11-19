@@ -33,14 +33,27 @@ See [`dsh-maptec-maps/README.md`](./dsh-maptec-maps/README.md) for details.
 
 ## Publish to the public connector registry
 
-The canonical descriptor for [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) is [`maptec-maps.connector.json`](./maptec-maps.connector.json).
+Canonical descriptor: [`maptec-maps.connector.json`](./maptec-maps.connector.json).
 
-1. Fork `duhu2000/dsh-mcp-connector-registry`.
-2. Copy `maptec-maps.connector.json` to `connectors/maptec-maps.json` (filename must match `"id": "maptec-maps"`).
-3. Run `npm ci --legacy-peer-deps && npm test && npm run validate && npm run assets:check` in that repo.
-4. Open a PR following [ONBOARDING.md](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/ONBOARDING.md).
+- **Icon:** `https://cdn.jsdelivr.net/gh/maptec-api/agent-plugins@main/assets/logo.png` (pin to a commit tag in the PR if maintainers require a fixed URL).
+- **Key UI:** `auth.api-key` with `Authorization` header (raw key, no Bearer); help link → Maptec console.
 
-Do not commit real API keys in the descriptor. After merge, users refresh the MCP connector market in DSH.
+### PR checklist
+
+1. Fork [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) and branch, e.g. `add-maptec-maps`.
+2. Copy **this file** to `connectors/maptec-maps.json` (`id` must be `maptec-maps`).
+3. Locally (Node 24 recommended):
+
+   ```bash
+   npm ci --legacy-peer-deps
+   npm test && npm run validate && npm run assets:check
+   ```
+
+4. Open a PR to `duhu2000/dsh-mcp-connector-registry:main`; complete the PR template checklist.
+5. Expect maintainers to add `candidates/records/maptec-maps.json` (vendor verification / acceptance). Hosted API-key probes may return 401 without a key — that is expected.
+6. After merge, users refresh **MCP 连接器** in DSH; no connector npm release required.
+
+Do not commit real API keys. Optional Skill for end users: `npx skills add maptec-api/agent-plugins --skill maptec-maps` (not part of the registry descriptor).
 
 ## Release ZIP
 
