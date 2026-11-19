@@ -151,7 +151,8 @@ for (const target of targets) {
     const patch = await readFile(`${directory}/deepseek/dsh-maptec-maps/cordis.patch.yml`, 'utf8');
     assert(patch.includes('dsh-mcp-client'));
     assert(patch.includes('https://mcp.maptec.com/mcp'));
-    assert(patch.includes('MAPTEC_API_KEY'));
+    assert(patch.includes("Authorization: '${credential:MAPTEC_API_KEY}'"));
+    assert(patch.includes('expandTemplates: true'));
     assert(patch.includes('bundledSkillDir: ./skills'));
     assert.deepEqual(
       await readFile(`${directory}/deepseek/dsh-maptec-maps/skills/maptec-maps/SKILL.md`),

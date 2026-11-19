@@ -28,14 +28,15 @@ Restart DeepSeek Harness after install (`dsh web` or Desktop).
 
 ## Configure Maptec API Key
 
-Set your [Maptec application API Key](https://lbs.maptec.com/console/) in the environment **before** starting DSH. Use the raw key (no `Bearer` prefix):
+Use the **raw** application key (no `Bearer` prefix). DSH resolves `${credential:MAPTEC_API_KEY}` from, in order:
 
-```bash
-export MAPTEC_API_KEY='your-key'
-dsh web --profile web
-```
+1. Saved entry in harness credentials (Settings / `.credentials.yaml`)
+2. Environment when you **launch** DSH (`MAPTEC_API_KEY=… dsh web`)
+3. Project `.env`, then `$DSH_HOME/.env`
 
-Or add the same variable to your shell profile / Desktop launch environment.
+**Desktop:** exporting in a terminal after the app is already running does **not** update DSH. Put the key in `~/.dsh/.env` as `MAPTEC_API_KEY=…`, save it in credentials, or fully quit and relaunch Desktop with the variable set.
+
+If the plugin shows **“invalid config”** on enable, the old bundle used `!!js process.env.MAPTEC_API_KEY`, which becomes `undefined` when the env var is missing and fails schema validation. Pull the latest bundle and set the key using one of the paths above, then restart DSH.
 
 Tools appear as `mcp__maptec__<tool>`. Invoke the skill with `/maptec-maps` when the filesystem skill provider is active.
 
