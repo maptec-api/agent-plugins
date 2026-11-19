@@ -1,10 +1,20 @@
-# Maptec Agent Plugins
+<div align="center">
+
+<a name="maptec-agent-plugins"></a>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="./.github/assets/maptec-agent-plugins-title-dark.svg"><img src="./.github/assets/maptec-agent-plugins-title.svg" alt="Maptec Agent Plugins" width="360" height="45"></picture>
 
 [English](README.md) | [简体中文](README.zh-CN.md)
+
+</div>
 
 **Maptec Maps**, by **云图知行**, connects AI assistants to Maptec for place search, geocoding, route planning, distance calculation, along-route search, map matching, IP geolocation, and map preview rendering. Available capabilities depend on the tools exposed by your connected MCP server.
 
 Source: [maptec-api/agent-plugins](https://github.com/maptec-api/agent-plugins).
+
+<p align="center">
+  <img src="./.github/assets/maptec-maps-cover.jpg" alt="Maptec Maps: place search, geocoding, routing, and more" width="720">
+</p>
 
 ## Requirements
 
