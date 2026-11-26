@@ -4,26 +4,19 @@ Local CI on the descriptor **passed** (`npm test`, `npm run validate`, `npm run 
 
 Descriptor source: [`maptec-maps.connector.json`](./maptec-maps.connector.json) → upstream path `connectors/maptec-maps.json`.
 
-## Option A — Script (recommended)
+## Option A — Git fork and local checks
 
-```bash
-cd /path/to/agent-plugins
-./scripts/prepare-dsh-registry-pr.sh
-```
-
-The script prints a ready git checkout under `$TMPDIR`. Then:
-
-1. Fork https://github.com/duhu2000/dsh-mcp-connector-registry on GitHub.
-2. In that checkout:
+1. Fork https://github.com/duhu2000/dsh-mcp-connector-registry and branch, e.g. `add-maptec-maps`.
+2. Copy [`maptec-maps.connector.json`](./maptec-maps.connector.json) to `connectors/maptec-maps.json` in that checkout.
+3. Run (Node 24 recommended):
 
    ```bash
-   cd "$TMPDIR/dsh-mcp-connector-registry-pr"   # path from script output
-   git remote add fork git@github.com:<your-account>/dsh-mcp-connector-registry.git
-   git push -u fork add-maptec-maps
+   npm ci --legacy-peer-deps
+   npm test && npm run validate && npm run assets:check
    ```
 
-3. Open PR: **base** `duhu2000/dsh-mcp-connector-registry` `main` ← **head** `<your-account>:add-maptec-maps`.
-4. Paste the PR body below; complete the upstream PR checklist.
+4. Push to your fork and open PR: **base** `duhu2000/dsh-mcp-connector-registry` `main` ← **head** `<your-account>:add-maptec-maps`.
+5. Paste the PR body below; complete the upstream PR checklist.
 
 ## Option B — GitHub UI only
 
@@ -31,7 +24,7 @@ The script prints a ready git checkout under `$TMPDIR`. Then:
 2. In your fork: **Add file** → `connectors/maptec-maps.json`, paste contents from this repo.
 3. Open PR to `duhu2000:main`.
 
-## Option C — Maintainer intake
+## Option C — Maintainer intake (no PR)
 
 If you cannot open a PR, file a [connector request issue](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml) and attach the JSON (no real keys).
 

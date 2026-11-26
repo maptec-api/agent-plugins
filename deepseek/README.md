@@ -42,20 +42,15 @@ Canonical descriptor: [`maptec-maps.connector.json`](./maptec-maps.connector.jso
 
 1. Fork [dsh-mcp-connector-registry](https://github.com/duhu2000/dsh-mcp-connector-registry) and branch, e.g. `add-maptec-maps`.
 2. Copy **this file** to `connectors/maptec-maps.json` (`id` must be `maptec-maps`).
-3. Locally (Node 24 recommended), or from this repo:
-
-   ```bash
-   ./scripts/prepare-dsh-registry-pr.sh
-   ```
-
-   Then push the printed `$WORK` checkout to your fork and open the PR. Manual equivalent:
+3. In that fork checkout (Node 24 recommended), run:
 
    ```bash
    npm ci --legacy-peer-deps
    npm test && npm run validate && npm run assets:check
    ```
 
-4. Open a PR to `duhu2000/dsh-mcp-connector-registry:main`; complete the PR template checklist.
+   Push the branch to your fork and open the PR.
+4. Open a PR to `duhu2000/dsh-mcp-connector-registry:main`; complete the PR template checklist. See [`REGISTRY-PR.md`](./REGISTRY-PR.md) for a suggested PR body.
 5. Expect maintainers to add `candidates/records/maptec-maps.json` (vendor verification / acceptance). Hosted API-key probes may return 401 without a key — that is expected.
 6. After merge, users refresh **MCP 连接器** in DSH; no connector npm release required.
 
