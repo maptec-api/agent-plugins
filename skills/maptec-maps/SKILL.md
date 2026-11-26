@@ -3,15 +3,22 @@ name: maptec-maps
 description: Search places and nearby businesses, resolve addresses or coordinates, plan routes, compare travel distances, search along a route, match road tracks, locate IP addresses, and render map previews using Maptec MCP. Use when Maptec is requested or is the connected map provider, including mapping requests that do not mention Maptec by name.
 description_zh: 使用 Maptec MCP 进行地点与周边搜索、地理编码、路线规划、距离计算、沿途搜索、轨迹绑路、IP 定位与地图预览；当用户需要地图、路线、地址或坐标查询时使用。
 description_en: Search places, geocode, plan routes, and related map tasks with Maptec MCP; use for map, routing, address, or coordinate requests.
-version: 0.2.0
+version: 0.2.1
 author: 云图知行
 ---
 
 Use the connected Maptec MCP server and discover its actual tools and parameter schemas before calling them. Answer in the user's language.
 
-If the connection needs credentials, direct the user to the host's secure connection flow. Maptec application API keys are created at https://lbs.maptec.com/console/project-asset . The official remote endpoint is https://mcp.maptec.com/mcp and expects the API key itself in the Authorization header. Do not prepend Bearer unless the provider changes its documented requirements. Never request keys in chat or store them in files.
+Use only the connected Maptec MCP tools for Maptec queries and previews. If authorization is missing or expired, stop the affected calls and direct the user to the host's Maptec connection settings to connect or reconnect. Maptec application API keys are created at https://lbs.maptec.com/console/project-asset . The official remote endpoint is https://mcp.maptec.com/mcp and expects the API key itself in the Authorization header. Do not prepend Bearer unless the provider changes its documented requirements. If access to a service is denied, tell the user which service needs permission. Leave credential handling to the connector. Do not inspect local configuration or credential stores, ask for keys in chat, or fall back to shell commands, direct HTTP requests, or a browser SDK to retrieve Maptec results.
 
-Ask only for information needed for the requested operation. Use locations and coordinates already supplied in the conversation. Clarify an ambiguous city or place only when it would materially change the result. Ask for a search center when a nearby request lacks one, and obtain missing origin or destination for routing; never assume the user's current location. Place search and geocoding do not require a route starting point or travel mode. For routing, clarify the mode when necessary; if using a documented default, state the mode used.
+Ask only for information needed for the requested operation. Use locations and coordinates already supplied in the conversation. Clarify an ambiguous city or place only when it would materially change the result. Ask for a search center when a nearby request lacks one. Never assume the user's current location. Place search and geocoding do not require a route starting point or travel mode. For routing, clarify the mode when necessary and state the mode if you use a documented default.
+
+## Route planning and map previews
+
+1. Reuse known endpoints. Resolve place names with `map_search_text` and street addresses with `map_search_geocode`. Ask only about missing or materially ambiguous endpoints.
+2. Reuse a route already computed for the same inputs in this task, or call `map_routes_directions` with the confirmed endpoints and mode. If the service returns `ZERO_RESULTS`, report that no route was found and stop the route workflow. Use the selected route's `summary.distanceMeters` and `summary.durationSeconds` when returned. Label `summary.trafficDurationSeconds` as traffic-aware if reported. Only generate a map if the user requests one.
+3. To show the route on a map, pass the selected route's exact `overviewPolyline` as `routes[].encodedPolyline` to `map_ui_compose_scene`. Pass the resulting scene to `map_ui_preview_html`. For along-route search, pass the same exact value as `route.encodedPolyline` to `map_search_along_route`. Treat the polyline as an opaque value and do not manually transcribe, repair, or re-encode it.
+4. If the geometry is missing, malformed, truncated, or cannot be passed intact, stop the operation that needs it. For an unavailable map preview, whether due to geometry, a missing or failed tool, or an output the user cannot open, return the verified route summary and explain the limitation. Do not repeat a successful route call to recover geometry.
 
 ## Tool reference
 
@@ -157,7 +164,7 @@ Assembles place markers and routes into a MapScene for browser rendering. It per
 | `scene` | object | yes | MapScene v1 JSON, typically from `map_ui_compose_scene` |
 | `title` | string | no | Page title |
 
-The generated page contains no server-side API key; basemap authentication is configured on the browser side (for example via `?key=`).
+The preview may need separate browser-side basemap authorization. Keep the MCP connector credential out of the preview HTML and URL.
 
 ## Choosing tools
 
@@ -167,13 +174,13 @@ The generated page contains no server-side API key; basemap authentication is co
 | Convert a street address to coordinates | Geocoding, such as `map_search_geocode` |
 | Find an address for supplied coordinates | Reverse geocoding, such as `map_search_reverse` |
 | Find businesses around a location | Nearby search, such as `map_search_nearby`; resolve a named search center to coordinates first if needed |
-| Find businesses or services along a planned route | Along-route search, such as `map_search_along_route`, using the `overviewPolyline` returned by the route |
+| Find businesses or services along a planned route | `map_search_along_route` with the selected route's complete `overviewPolyline` |
 | Get more information about a returned place | Place details, such as `map_search_places`, using an actual returned place ID |
-| Plan a route between locations | Directions, such as `map_routes_directions`; resolve named endpoints to suitable coordinates if needed |
+| Plan a route between locations | Follow the route workflow above to resolve named endpoints and call `map_routes_directions` |
 | Compare travel distances or times across origins and destinations | Distance matrix, such as `map_matrix_distance` |
 | Align supplied track points to roads | Map matching, such as `map_track_snap_to_roads`, preserving the supplied point order |
 | Look up the approximate location of a supplied IP address | IP geolocation, such as `map_location_ip`; do not present it as an exact device or live GPS location |
-| Show the user an actual map of the results | Compose a scene with `map_ui_compose_scene`, then render it with `map_ui_preview_html` |
+| Show the results on a map | `map_ui_compose_scene`, then `map_ui_preview_html`. Follow the route workflow above if drawing a route |
 
 Preserve the coordinate order, coordinate system, and units defined by each tool; do not silently swap latitude and longitude or convert coordinate systems. Distinguish route distance from straight-line distance. Include duration or traffic timing only when returned by the service. Do not invent tools, parameters, ratings, opening hours, results, or routes.
 

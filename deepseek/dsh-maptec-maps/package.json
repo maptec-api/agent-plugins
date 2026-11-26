@@ -1,6 +1,6 @@
 {
   "name": "dsh-maptec-maps",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Maptec Maps remote MCP and bundled Skill for DeepSeek Harness",
   "type": "module",
   "main": "index.js",

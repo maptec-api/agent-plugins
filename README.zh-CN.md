@@ -1,10 +1,20 @@
-# Maptec Agent Plugins
+<div align="center">
+
+<a name="maptec-agent-plugins"></a>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="./.github/assets/maptec-agent-plugins-title-dark.svg"><img src="./.github/assets/maptec-agent-plugins-title.svg" alt="Maptec Agent Plugins" width="360" height="45"></picture>
 
 [English](README.md) | [简体中文](README.zh-CN.md)
+
+</div>
 
 由 **云图知行** 提供的 **Maptec Maps** 技能与插件集合，为 AI 助手提供地点搜索、地理编码、路线规划、距离计算、沿途搜索、轨迹绑路、IP 定位和地图预览等能力。具体可用工具以实际连接的 MCP 服务为准。
 
 源码：[maptec-api/agent-plugins](https://github.com/maptec-api/agent-plugins)。
+
+<p align="center">
+  <img src="./.github/assets/maptec-maps-cover.jpg" alt="Maptec Maps：地点搜索、地理编码、路线规划等功能" width="720">
+</p>
 
 ## 使用条件
 
