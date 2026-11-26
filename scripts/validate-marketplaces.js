@@ -137,7 +137,7 @@ for (const target of targets) {
   if (target.id === 'deepseek') {
     assert.equal(manifest.auth.mode, 'api-key');
     assert.equal(manifest.auth.apiKeyHeader, 'Authorization');
-    assert.equal(manifest.auth.credentialHelpUrl, 'https://lbs.maptec.com/console/');
+    assert.equal(manifest.auth.credentialHelpUrl, 'https://lbs.maptec.com/console/project-asset');
     assert.match(manifest.icon, /^https:\/\/cdn\.jsdelivr\.net\/gh\/maptec-api\/agent-plugins@[0-9a-f]{7,}\/assets\/logo\.png$/, 'deepseek connector: icon should be pinned jsDelivr logo URL');
     assert.equal(manifest.servers.length, 1);
     assert.equal(manifest.servers[0].serverKey, 'maptec');

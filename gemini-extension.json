@@ -5,7 +5,7 @@
   "settings": [
     {
       "name": "Maptec API Key",
-      "description": "Application API key from https://lbs.maptec.com/console/ . Enter the key itself, without Bearer.",
+      "description": "Application API key from https://lbs.maptec.com/console/project-asset . Enter the key itself, without Bearer.",
       "envVar": "MAPTEC_API_KEY",
       "sensitive": true
     }

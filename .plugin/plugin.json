@@ -28,7 +28,7 @@
       "MAPTEC_API_KEY": {
         "type": "string",
         "title": "Maptec API Key",
-        "description": "Application API key from https://lbs.maptec.com/console/ . Sent as the Authorization header value (do not add Bearer unless Maptec docs require it)."
+        "description": "Application API key from https://lbs.maptec.com/console/project-asset . Sent as the Authorization header value (do not add Bearer unless Maptec docs require it)."
       }
     },
     "required": [

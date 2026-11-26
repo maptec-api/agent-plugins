@@ -17,7 +17,7 @@ Two install paths:
 
    From Git: `dsh plugin --profile web add 'github:maptec-api/agent-plugins#path:deepseek/dsh-maptec-maps'`
 
-2. Set your [Maptec application API Key](https://lbs.maptec.com/console/) as `MAPTEC_API_KEY` (raw key, **no** `Bearer` prefix) in the environment, then fully restart DSH.
+2. Set your [Maptec application API Key](https://lbs.maptec.com/console/project-asset) as `MAPTEC_API_KEY` (raw key, **no** `Bearer` prefix) in the environment, then fully restart DSH.
 
 3. Tools are exposed as `mcp__maptec__*`. Use the bundled skill via `/maptec-maps` when skills are enabled.
 

@@ -9,7 +9,7 @@ Source: [maptec-api/agent-plugins](https://github.com/maptec-api/agent-plugins).
 ## Requirements
 
 - An AI assistant with Skill or MCP support.
-- A Maptec application API key from the [console](https://lbs.maptec.com/console/).
+- A Maptec application API key from the [console](https://lbs.maptec.com/console/project-asset).
 - Node.js 22.20 or later for the Skills CLI; Node.js 24 is recommended for source checks and builds.
 
 ## Installation

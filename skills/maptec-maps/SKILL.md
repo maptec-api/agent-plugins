@@ -9,7 +9,7 @@ author: 云图知行
 
 Use the connected Maptec MCP server and discover its actual tools and parameter schemas before calling them. Answer in the user's language.
 
-If the connection needs credentials, direct the user to the host's secure connection flow. Maptec application API keys are created at https://lbs.maptec.com/console/ . The official remote endpoint is https://mcp.maptec.com/mcp and expects the API key itself in the Authorization header. Do not prepend Bearer unless the provider changes its documented requirements. Never request keys in chat or store them in files.
+If the connection needs credentials, direct the user to the host's secure connection flow. Maptec application API keys are created at https://lbs.maptec.com/console/project-asset . The official remote endpoint is https://mcp.maptec.com/mcp and expects the API key itself in the Authorization header. Do not prepend Bearer unless the provider changes its documented requirements. Never request keys in chat or store them in files.
 
 Ask only for information needed for the requested operation. Use locations and coordinates already supplied in the conversation. Clarify an ambiguous city or place only when it would materially change the result. Ask for a search center when a nearby request lacks one, and obtain missing origin or destination for routing; never assume the user's current location. Place search and geocoding do not require a route starting point or travel mode. For routing, clarify the mode when necessary; if using a documented default, state the mode used.
 

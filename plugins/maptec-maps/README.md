@@ -27,7 +27,7 @@ Install **maptec-maps** from **Maptec Open Plugins**, then configure your Maptec
 
 ## Maptec API key
 
-Create an application API key in the [Maptec console](https://lbs.maptec.com/console/).
+Create an application API key in the [Maptec console](https://lbs.maptec.com/console/project-asset).
 
 - Endpoint: `https://mcp.maptec.com/mcp`
 - Header: `Authorization`, with the raw API key and no `Bearer` prefix

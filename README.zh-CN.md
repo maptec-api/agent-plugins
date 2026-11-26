@@ -9,7 +9,7 @@
 ## 使用条件
 
 - 支持 Skill 或 MCP 的 AI 助手。
-- 从 [Maptec 控制台](https://lbs.maptec.com/console/) 获取的应用 API Key。
+- 从 [Maptec 控制台](https://lbs.maptec.com/console/project-asset) 获取的应用 API Key。
 - 使用 Skills CLI 需要 Node.js 22.20 或更新版本；源码检查和构建推荐使用 Node.js 24。
 
 ## 安装

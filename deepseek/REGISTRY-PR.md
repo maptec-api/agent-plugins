@@ -48,7 +48,7 @@ Add **Maptec 地图** (`maptec-maps`): official Maptec remote MCP (Streamable HT
 - Auth: API key in `Authorization` header (raw key, **no** Bearer prefix)
 - Vendor: 云图知行
 - Docs: https://lbs.maptec.com/docs/en-US/mcp/introduction
-- Key console: https://lbs.maptec.com/console/
+- Key console: https://lbs.maptec.com/console/project-asset
 
 Hosted MCP; anonymous probe may return 401 without credentials — expected.
 

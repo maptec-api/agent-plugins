@@ -3,7 +3,7 @@
   "title_en": "Maptec Configuration",
   "description": "填写 Maptec API Key 以连接远程 MCP。凭证仅存储在本机 ~/.workbuddy 目录下。",
   "description_en": "Enter your Maptec API Key to connect the remote MCP. Credentials are stored locally under ~/.workbuddy only.",
-  "docUrl": "https://lbs.maptec.com/console/",
+  "docUrl": "https://lbs.maptec.com/console/project-asset",
   "docLabel": "如何获取 Maptec API Key？",
   "docLabel_en": "How to get a Maptec API Key?",
   "fields": [

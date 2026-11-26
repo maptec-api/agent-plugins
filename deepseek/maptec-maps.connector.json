@@ -19,7 +19,7 @@
     "credentialPlaceholder": "请输入 Maptec 应用 API Key",
     "credentialDescription": "按官方要求将原始 API Key 写入 Authorization 请求头，不要加 Bearer 前缀；Key 仅保存在 DSH 本机。",
     "credentialHelpLabel": "前往 Maptec 控制台申请 Key",
-    "credentialHelpUrl": "https://lbs.maptec.com/console/"
+    "credentialHelpUrl": "https://lbs.maptec.com/console/project-asset"
   },
   "servers": [
     {
